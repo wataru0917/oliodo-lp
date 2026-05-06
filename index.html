@@ -1322,6 +1322,92 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .nav-cta { display: none; }
   .hero { min-height: 600px; }
 }
+
+/* =========================================================
+   Bubble Gallery (フウセン浮遊)
+========================================================= */
+.bubble-field {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(8px, 1.5vw, 24px);
+  padding: 20px 0;
+  position: relative;
+}
+
+.bubble {
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translateY(40px) scale(0.6);
+  transition: opacity 1.2s var(--ease-out), transform 1.2s var(--ease-out);
+  transition-delay: var(--delay, 0s);
+  box-shadow:
+    0 8px 24px rgba(58, 36, 16, 0.12),
+    0 2px 6px rgba(58, 36, 16, 0.08),
+    inset 0 0 40px rgba(255, 255, 255, 0.1);
+  will-change: transform, opacity;
+}
+
+.bubble.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1) rotate(var(--rot, 0deg));
+  animation: floatGently var(--float-dur, 6s) ease-in-out var(--float-delay, 0s) infinite;
+}
+
+.bubble img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1s var(--ease), filter 0.6s var(--ease);
+  display: block;
+}
+
+.bubble:hover {
+  z-index: 10;
+}
+.bubble:hover img {
+  transform: scale(1.12);
+  filter: brightness(1.05) saturate(1.1);
+}
+
+.bubble::after {
+  content: '';
+  position: absolute;
+  top: 8%;
+  left: 12%;
+  width: 28%;
+  height: 24%;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* サイズバリエーション */
+.bubble-s  { width: clamp(80px, 10vw, 130px);  height: clamp(80px, 10vw, 130px); }
+.bubble-m  { width: clamp(110px, 14vw, 180px); height: clamp(110px, 14vw, 180px); }
+.bubble-l  { width: clamp(140px, 18vw, 230px); height: clamp(140px, 18vw, 230px); }
+.bubble-xl { width: clamp(180px, 22vw, 280px); height: clamp(180px, 22vw, 280px); }
+
+@media (max-width: 720px) {
+  .bubble-s  { width: 70px;  height: 70px; }
+  .bubble-m  { width: 95px;  height: 95px; }
+  .bubble-l  { width: 125px; height: 125px; }
+  .bubble-xl { width: 155px; height: 155px; }
+  .bubble-field { gap: 8px; }
+}
+
+/* ふわふわ浮遊アニメーション */
+@keyframes floatGently {
+  0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+  50%      { transform: translateY(-12px) rotate(calc(var(--rot, 0deg) * -1)); }
+}
+
 </style>
 
 </head>
@@ -1527,49 +1613,62 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 <section class="section gallery" id="gallery">
   <span class="section-num reveal">— 06 / Gallery</span>
   <div class="content">
-    <div class="section-header reveal"><span class="eyebrow">Archive</span><h2 class="heading-jp">Oliodo.のしごと、<br>季節の便り。</h2></div>
-    <div class="gallery-filter reveal"><button data-filter="all" class="active">すべて</button><button data-filter="baked">焼き菓子</button><button data-filter="chocolate">ショコラ</button><button data-filter="cake">ケーキ</button><button data-filter="parfait">パフェ</button></div>
-    <div class="gallery-grid" id="galleryGrid">
-      <div class="gallery-item tall reveal" data-cat="baked"><img src="images/baked-canele1.jpg" alt="Baked" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="baked"><img src="images/baked-galette1.jpg" alt="Baked" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="baked"><img src="images/baked-financier.jpg" alt="Baked" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="baked"><img src="images/baked-canele-matcha.jpg" alt="Baked" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="baked"><img src="images/baked-canele-brown.jpg" alt="Baked" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="baked"><img src="images/baked-canele-choco.jpg" alt="Baked" loading="lazy"></div>
-      <div class="gallery-item tall reveal" data-cat="baked"><img src="images/baked-canele-assort.jpg" alt="Baked" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="baked"><img src="images/baked-canele-top.jpg" alt="Baked" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="baked"><img src="images/baked-galette2.jpg" alt="Baked" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="baked"><img src="images/baked-canele-wood.jpg" alt="Baked" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="baked"><img src="images/baked-tigre1.jpg" alt="Baked" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="baked"><img src="images/baked-tigre-top.jpg" alt="Baked" loading="lazy"></div>
-      <div class="gallery-item tall reveal" data-cat="baked"><img src="images/baked-canele-pile.jpg" alt="Baked" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="chocolate"><img src="images/choco-dot1.jpg" alt="Chocolate" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="chocolate"><img src="images/choco-bonbon1.jpg" alt="Chocolate" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="chocolate"><img src="images/choco-box1.jpg" alt="Chocolate" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="chocolate"><img src="images/choco-terrine.jpg" alt="Chocolate" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="chocolate"><img src="images/choco-box2.jpg" alt="Chocolate" loading="lazy"></div>
-      <div class="gallery-item tall reveal" data-cat="chocolate"><img src="images/choco-dot2.jpg" alt="Chocolate" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="cake"><img src="images/cake-fruit-event.jpg" alt="Cake" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="cake"><img src="images/cake-anniv.jpg" alt="Cake" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="cake"><img src="images/cake-buffet1.jpg" alt="Cake" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="cake"><img src="images/cake-buffet2.jpg" alt="Cake" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="cake"><img src="images/cake-buffet3.jpg" alt="Cake" loading="lazy"></div>
-      <div class="gallery-item tall reveal" data-cat="cake"><img src="images/cake-terrine-eg.jpg" alt="Cake" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="cake"><img src="images/cake-terrine-choco.jpg" alt="Cake" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="cake"><img src="images/cake-matcha-slice.jpg" alt="Cake" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="cake"><img src="images/cake-stollen1.jpg" alt="Cake" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="cake"><img src="images/cake-stollen2.jpg" alt="Cake" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="cake"><img src="images/cake-short.jpg" alt="Cake" loading="lazy"></div>
-      <div class="gallery-item tall reveal" data-cat="parfait"><img src="images/pf-grandprix2.jpg" alt="Parfait" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="parfait"><img src="images/pf-pistachio2.jpg" alt="Parfait" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="parfait"><img src="images/pf-cherry5.jpg" alt="Parfait" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="parfait"><img src="images/pf-white.jpg" alt="Parfait" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="parfait"><img src="images/pf-pear1.jpg" alt="Parfait" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="parfait"><img src="images/pf-choco-or3.jpg" alt="Parfait" loading="lazy"></div>
-      <div class="gallery-item tall reveal" data-cat="parfait"><img src="images/pf-matcha2.jpg" alt="Parfait" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="parfait"><img src="images/pf-peach2.jpg" alt="Parfait" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="parfait"><img src="images/pf-cherry1.jpg" alt="Parfait" loading="lazy"></div>
-      <div class="gallery-item reveal" data-cat="parfait"><img src="images/pf-pistachio3.jpg" alt="Parfait" loading="lazy"></div>
+    <div class="section-header reveal">
+      <span class="eyebrow">Archive</span>
+      <h2 class="heading-jp">Oliodo.のしごと、<br>季節の便り。</h2>
+      <p style="font-family:var(--sans-en); font-size:11px; letter-spacing:0.36em; text-transform:uppercase; color:var(--text-mute); margin-top:16px;">A Garden of Memories</p>
+    </div>
+    <div class="bubble-field" id="bubbleField">
+      <div class="bubble bubble-m" style="--delay:0.21s; --float-dur:6.6s; --float-delay:0.4s; --rot:0.2deg;"><img src="images/pf-matcha1.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:0.08s; --float-dur:6.0s; --float-delay:0.2s; --rot:-0.4deg;"><img src="images/cake-fruit-event.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.13s; --float-dur:5.7s; --float-delay:4.1s; --rot:-2.3deg;"><img src="images/pf-pear2.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.88s; --float-dur:7.8s; --float-delay:2.9s; --rot:-0.6deg;"><img src="images/baked-tigre-top.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-xl" style="--delay:0.07s; --float-dur:7.4s; --float-delay:1.4s; --rot:-2.1deg;"><img src="images/choco-dot1.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.43s; --float-dur:7.3s; --float-delay:0.9s; --rot:0.5deg;"><img src="images/cake-buffet1.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:0.52s; --float-dur:6.2s; --float-delay:0.3s; --rot:-2.6deg;"><img src="images/pf-pear3.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.95s; --float-dur:5.7s; --float-delay:1.6s; --rot:0.5deg;"><img src="images/pf-pistachio3.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:0.42s; --float-dur:7.2s; --float-delay:3.5s; --rot:-1.5deg;"><img src="images/pf-cherry4.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:0.74s; --float-dur:7.5s; --float-delay:3.6s; --rot:-1.3deg;"><img src="images/cake-anniv.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-xl" style="--delay:0.17s; --float-dur:5.7s; --float-delay:3.8s; --rot:-2.1deg;"><img src="images/baked-galette1.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:0.05s; --float-dur:6.7s; --float-delay:3.8s; --rot:0.4deg;"><img src="images/pf-matcha3.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-l" style="--delay:0.44s; --float-dur:6.8s; --float-delay:3.0s; --rot:0.5deg;"><img src="images/pf-cherry2.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:1.18s; --float-dur:7.8s; --float-delay:2.4s; --rot:1.0deg;"><img src="images/pf-choco-or1.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.98s; --float-dur:6.6s; --float-delay:5.0s; --rot:1.9deg;"><img src="images/pf-cherry1.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.54s; --float-dur:6.7s; --float-delay:0.1s; --rot:-0.2deg;"><img src="images/pf-grandprix3.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.16s; --float-dur:4.2s; --float-delay:3.8s; --rot:-2.2deg;"><img src="images/baked-canele-matcha.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.55s; --float-dur:7.5s; --float-delay:0.4s; --rot:-0.3deg;"><img src="images/cake-buffet2.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:1.24s; --float-dur:7.3s; --float-delay:4.3s; --rot:-1.3deg;"><img src="images/pf-peach1.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:0.5s; --float-dur:7.5s; --float-delay:4.8s; --rot:-2.1deg;"><img src="images/baked-canele-pile.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.32s; --float-dur:4.9s; --float-delay:2.4s; --rot:0.5deg;"><img src="images/cake-terrine-eg.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.01s; --float-dur:5.7s; --float-delay:1.8s; --rot:0.4deg;"><img src="images/baked-galette2.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-xl" style="--delay:0.97s; --float-dur:6.1s; --float-delay:3.1s; --rot:1.1deg;"><img src="images/pf-choco1.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:1.26s; --float-dur:7.1s; --float-delay:4.4s; --rot:1.8deg;"><img src="images/cake-buffet3.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:0.56s; --float-dur:4.4s; --float-delay:3.2s; --rot:-2.6deg;"><img src="images/pf-white.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.29s; --float-dur:4.6s; --float-delay:1.7s; --rot:-2.7deg;"><img src="images/cake-matcha-slice.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.21s; --float-dur:4.4s; --float-delay:1.8s; --rot:-2.8deg;"><img src="images/baked-canele-assort.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-l" style="--delay:0.86s; --float-dur:4.6s; --float-delay:1.3s; --rot:-0.9deg;"><img src="images/pf-peach2.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:0.17s; --float-dur:7.4s; --float-delay:5.0s; --rot:-0.2deg;"><img src="images/cake-short.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:0.12s; --float-dur:4.4s; --float-delay:1.7s; --rot:-1.4deg;"><img src="images/pf-pear-cu.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-l" style="--delay:0.23s; --float-dur:4.1s; --float-delay:4.8s; --rot:0.2deg;"><img src="images/choco-terrine.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.76s; --float-dur:4.1s; --float-delay:2.6s; --rot:2.9deg;"><img src="images/cake-terrine-choco.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-l" style="--delay:0.97s; --float-dur:5.0s; --float-delay:1.8s; --rot:-2.0deg;"><img src="images/pf-choco-or3.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-l" style="--delay:0.75s; --float-dur:7.1s; --float-delay:1.6s; --rot:-1.7deg;"><img src="images/cake-stollen1.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-l" style="--delay:1.38s; --float-dur:7.4s; --float-delay:4.0s; --rot:1.9deg;"><img src="images/baked-tigre1.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-l" style="--delay:0.32s; --float-dur:6.1s; --float-delay:1.8s; --rot:-2.8deg;"><img src="images/pf-cherry6.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.39s; --float-dur:5.0s; --float-delay:3.5s; --rot:2.7deg;"><img src="images/pf-grandprix2.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:1.31s; --float-dur:8.0s; --float-delay:4.8s; --rot:-0.8deg;"><img src="images/pf-cherry3.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.32s; --float-dur:4.8s; --float-delay:1.0s; --rot:0.7deg;"><img src="images/pf-pear1.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-xl" style="--delay:1.18s; --float-dur:5.9s; --float-delay:3.3s; --rot:1.8deg;"><img src="images/choco-bonbon1.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.92s; --float-dur:7.6s; --float-delay:3.9s; --rot:1.5deg;"><img src="images/pf-matcha2.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:0.25s; --float-dur:7.2s; --float-delay:1.7s; --rot:1.8deg;"><img src="images/pf-pistachio2.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-xl" style="--delay:0.55s; --float-dur:5.6s; --float-delay:4.7s; --rot:1.3deg;"><img src="images/baked-canele-choco.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.18s; --float-dur:4.6s; --float-delay:4.5s; --rot:1.8deg;"><img src="images/cake-stollen2.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:1.16s; --float-dur:7.9s; --float-delay:3.3s; --rot:-0.9deg;"><img src="images/pf-choco-or2.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:0.18s; --float-dur:4.1s; --float-delay:4.9s; --rot:0.9deg;"><img src="images/baked-canele-top.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:1.31s; --float-dur:5.7s; --float-delay:4.4s; --rot:2.0deg;"><img src="images/pf-cherry5.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.35s; --float-dur:5.2s; --float-delay:1.2s; --rot:0.5deg;"><img src="images/pf-matcha-cu.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.59s; --float-dur:4.5s; --float-delay:4.6s; --rot:-0.9deg;"><img src="images/baked-canele-wood.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:0.82s; --float-dur:7.6s; --float-delay:2.1s; --rot:2.5deg;"><img src="images/pf-pistachio1.jpg" alt="" loading="lazy"></div>
     </div>
   </div>
 </section>
@@ -1730,7 +1829,7 @@ function showSlide(i){slides.forEach((s,j)=>s.classList.toggle('active',j===i));
 let si=setInterval(()=>showSlide((cur+1)%slides.length),5500);
 dots.forEach((d,i)=>d.addEventListener('click',()=>{clearInterval(si);showSlide(i);si=setInterval(()=>showSlide((cur+1)%slides.length),5500);}));
 const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');obs.unobserve(e.target);}}),{threshold:0.12,rootMargin:'0px 0px -60px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+document.querySelectorAll('.reveal,.bubble').forEach(el=>obs.observe(el));
 document.querySelectorAll('.gallery-filter button').forEach(btn=>btn.addEventListener('click',()=>{
   document.querySelectorAll('.gallery-filter button').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
@@ -1738,7 +1837,7 @@ document.querySelectorAll('.gallery-filter button').forEach(btn=>btn.addEventLis
   document.querySelectorAll('.gallery-item').forEach(item=>item.classList.toggle('hidden',f!=='all'&&item.dataset.cat!==f));
 }));
 const lb=document.getElementById('lightbox'),lbImg=lb.querySelector('img');
-document.querySelectorAll('.gallery-item img,.masonry-item img').forEach(img=>{
+document.querySelectorAll('.bubble img,.masonry-item img').forEach(img=>{
   img.addEventListener('click',e=>{e.stopPropagation();lbImg.src=img.src;lb.classList.add('active');});
 });
 lb.addEventListener('click',e=>{if(e.target===lb||e.target.classList.contains('lb-close'))lb.classList.remove('active');});
