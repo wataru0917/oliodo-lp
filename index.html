@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oliodo. — 金木犀の香りのように、静かに心に残る菓子を。</title>
+<meta name="description" content="Oliodo.（オリオド）。Olivier odorant × Period. パティシエ佐藤亘による焼き菓子と洋菓子のブランド。人生の節目に寄り添う、ひと粒の物語。">
+<meta property="og:title" content="Oliodo. — 金木犀の香りのように、静かに心に残る菓子を。">
+<meta property="og:description" content="2025年大阪・関西万博「日本の宝物パフェグランプリ」受賞。季節の素材と職人の手仕事が織りなす、一口の物語。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lato:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@200;300;400;500&family=Noto+Serif+JP:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+   Reset & Tokens
+========================================================= */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  /* Brand Colors */
+  --bg-pure:       #FFFFFF;
+  --bg-cream:      #FAF7F2;
+  --bg-warm:       #F5EDE0;
+  --bg-section:    #F0E8D8;
+  --bg-dark:       #1A0F08;
+  --bg-darker:     #0F0805;
+
+  /* Text */
+  --text-primary:  #2C1A0A;
+  --text-body:     #3D2614;
+  --text-mute:     #6B5A47;
+  --text-soft:     #8B7459;
+  --text-light:    #FAF7F2;
+  --text-cream:    #E8C87A;
+
+  /* Brand Accent */
+  --chestnut:      #7B4F1F;
+  --chestnut-deep: #5A3815;
+  --chestnut-dark: #3A2410;
+  --gold:          #C9A85C;
+  --gold-light:    #E8C87A;
+  --gold-pale:     #F0E0B8;
+
+  /* Lines */
+  --line:          #E5DACA;
+  --line-soft:     #F0E8D8;
+  --line-strong:   #C9A85C;
+  --line-dark:     #3A2410;
+
+  /* Typography */
+  --serif-en: 'Cormorant Garamond', 'Times New Roman', serif;
+  --serif-jp: 'Noto Serif JP', '游明朝', 'Yu Mincho', serif;
+  --sans-jp:  'Noto Sans JP', '游ゴシック', sans-serif;
+  --sans-en:  'Lato', sans-serif;
+
+  --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Spacing */
+  --section-gap: clamp(80px, 10vw, 140px);
+  --content-pad: clamp(20px, 4vw, 56px);
+  --max-width: 1320px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans-jp);
+  background: var(--bg-pure);
+  color: var(--text-body);
+  font-weight: 300;
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "palt";
+  overflow-x: hidden;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; transition: color 0.4s var(--ease); }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+/* =========================================================
+   Utility / Section Base
+========================================================= */
+.section {
+  padding: var(--section-gap) 0;
+  position: relative;
+}
+.content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--content-pad);
+  position: relative;
+}
+.section-num {
+  position: absolute;
+  top: clamp(40px, 5vw, 64px);
+  left: clamp(20px, 4vw, 56px);
+  font-family: var(--sans-en);
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 400;
+  z-index: 2;
+}
+.eyebrow {
+  display: inline-block;
+  font-family: var(--sans-en);
+  font-size: 11px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--chestnut);
+  font-weight: 500;
+  margin-bottom: 24px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--gold);
+}
+.heading-jp {
+  font-family: var(--serif-jp);
+  font-weight: 300;
+  color: var(--text-primary);
+  line-height: 1.6;
+  letter-spacing: 0.1em;
+}
+.heading-en {
+  font-family: var(--serif-en);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-primary);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+.heading-en em {
+  font-style: italic;
+  color: var(--chestnut);
+}
+.section-header { margin-bottom: clamp(48px, 6vw, 80px); }
+
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 1.2s var(--ease-out), transform 1.2s var(--ease-out);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-d1 { transition-delay: 0.15s; }
+.reveal-d2 { transition-delay: 0.3s; }
+.reveal-d3 { transition-delay: 0.45s; }
+
+/* =========================================================
+   Header / Nav
+========================================================= */
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px clamp(20px, 4vw, 56px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid transparent;
+  transition: background 0.5s var(--ease), border-color 0.5s var(--ease);
+}
+.header.scrolled {
+  background: rgba(255, 255, 255, 0.98);
+  border-bottom-color: var(--line);
+}
+.header-logo {
+  height: 38px;
+  display: block;
+}
+.header-logo img {
+  height: 100%;
+  width: auto;
+  display: block;
+}
+.nav {
+  display: flex;
+  gap: clamp(20px, 2.6vw, 40px);
+  align-items: center;
+}
+.nav a {
+  font-family: var(--sans-en);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  font-weight: 500;
+  position: relative;
+  padding: 6px 0;
+}
+.nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: all 0.4s var(--ease);
+  transform: translateX(-50%);
+}
+.nav a:hover { color: var(--chestnut); }
+.nav a:hover::after { width: 100%; }
+.nav-cta {
+  padding: 10px 22px !important;
+  background: var(--chestnut-deep);
+  color: var(--text-light) !important;
+  border-radius: 0;
+  letter-spacing: 0.24em !important;
+}
+.nav-cta::after { display: none !important; }
+.nav-cta:hover {
+  background: var(--chestnut-dark);
+  color: var(--gold-light) !important;
+}
+.menu-btn {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+  z-index: 110;
+}
+.menu-btn span {
+  width: 24px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.4s var(--ease);
+}
+.menu-btn.active span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.menu-btn.active span:nth-child(2) { opacity: 0; }
+.menu-btn.active span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+@media (max-width: 900px) {
+  .menu-btn { display: flex; }
+  .nav {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-cream);
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+    transform: translateX(100%);
+    transition: transform 0.6s var(--ease);
+    z-index: 105;
+  }
+  .nav.active { transform: translateX(0); }
+  .nav a { font-size: 14px; }
+}
+
+/* =========================================================
+   Hero with Slideshow
+========================================================= */
+.hero {
+  height: 100vh;
+  min-height: 680px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-darker);
+}
+.hero-slides {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.8s var(--ease);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.hero-slide.active { opacity: 1; }
+.hero-slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 8, 5, 0.30) 0%,
+    rgba(15, 8, 5, 0.45) 60%,
+    rgba(15, 8, 5, 0.65) 100%
+  );
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: var(--text-light);
+  padding: 0 var(--content-pad);
+  max-width: 920px;
+}
+.hero-logo {
+  width: clamp(180px, 22vw, 280px);
+  height: auto;
+  margin: 0 auto 36px;
+  opacity: 0;
+  animation: heroLogoIn 1.6s var(--ease-out) 0.4s forwards;
+}
+.hero-jp {
+  font-family: var(--serif-jp);
+  font-size: clamp(20px, 2.6vw, 32px);
+  font-weight: 200;
+  letter-spacing: 0.2em;
+  line-height: 1.9;
+  color: var(--text-light);
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: heroFadeIn 1.4s var(--ease-out) 1.0s forwards;
+  text-shadow: 0 2px 30px rgba(0,0,0,0.4);
+}
+.hero-jp-sub {
+  font-family: var(--serif-jp);
+  font-size: clamp(13px, 1.2vw, 16px);
+  font-weight: 300;
+  letter-spacing: 0.4em;
+  color: var(--gold-light);
+  opacity: 0;
+  animation: heroFadeIn 1.4s var(--ease-out) 1.4s forwards;
+  margin-bottom: 48px;
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  font-family: var(--sans-en);
+  font-size: 10px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  opacity: 0;
+  animation: heroFadeIn 1.4s var(--ease-out) 2s forwards;
+  text-align: center;
+}
+.hero-scroll::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 32px;
+  background: var(--gold-light);
+  margin: 12px auto 0;
+  animation: scrollLine 2s var(--ease) 2s infinite;
+}
+.hero-dots {
+  position: absolute;
+  bottom: 80px;
+  right: 36px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  opacity: 0;
+  animation: heroFadeIn 1.4s var(--ease-out) 1.6s forwards;
+}
+.hero-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(232, 200, 122, 0.35);
+  cursor: pointer;
+  transition: all 0.4s var(--ease);
+}
+.hero-dot.active {
+  background: var(--gold-light);
+  transform: scale(1.6);
+}
+@media (max-width: 720px) {
+  .hero-dots { bottom: 70px; right: 20px; }
+}
+
+@keyframes heroLogoIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes scrollLine {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* =========================================================
+   Marquee
+========================================================= */
+.marquee {
+  background: var(--chestnut-dark);
+  color: var(--gold-light);
+  padding: 26px 0;
+  overflow: hidden;
+  border-top: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gold);
+}
+.marquee-inner {
+  display: flex;
+  gap: 60px;
+  animation: marquee 50s linear infinite;
+  white-space: nowrap;
+}
+.marquee span {
+  font-family: var(--serif-en);
+  font-size: clamp(18px, 2.2vw, 28px);
+  font-style: italic;
+  letter-spacing: 0.1em;
+}
+.marquee span::after {
+  content: '✦';
+  margin-left: 60px;
+  color: var(--gold);
+  font-style: normal;
+}
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
+/* =========================================================
+   Statement Section
+========================================================= */
+.statement {
+  background: var(--bg-cream);
+  text-align: center;
+}
+.statement-text {
+  font-family: var(--serif-jp);
+  font-size: clamp(18px, 2.4vw, 28px);
+  font-weight: 200;
+  line-height: 2.4;
+  letter-spacing: 0.18em;
+  color: var(--text-primary);
+  max-width: 880px;
+  margin: 0 auto;
+}
+.statement-text em {
+  color: var(--chestnut);
+  font-style: normal;
+  font-weight: 400;
+  position: relative;
+}
+.statement-text em::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.6;
+}
+.statement-divider {
+  width: 60px;
+  height: 1px;
+  background: var(--gold);
+  margin: 48px auto;
+}
+
+/* =========================================================
+   Concept Section
+========================================================= */
+.concept {
+  background: var(--bg-pure);
+}
+.concept-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(48px, 6vw, 96px);
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .concept-grid { grid-template-columns: 1fr 1fr; }
+}
+.concept-text {
+  font-family: var(--serif-jp);
+  font-size: clamp(13px, 1.05vw, 15px);
+  line-height: 2.3;
+  color: var(--text-body);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+}
+.concept-text p { margin-bottom: 1.6em; }
+.concept-text .lead {
+  font-size: clamp(20px, 2.2vw, 26px);
+  font-weight: 400;
+  color: var(--chestnut-deep);
+  margin-bottom: 1.2em;
+  letter-spacing: 0.18em;
+}
+.concept-text .pull-quote {
+  font-family: var(--serif-jp);
+  font-size: clamp(16px, 1.6vw, 20px);
+  font-weight: 400;
+  color: var(--chestnut-deep);
+  text-align: center;
+  padding: 32px 24px;
+  margin: 32px 0;
+  border-top: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gold);
+  letter-spacing: 0.16em;
+  line-height: 2.1;
+  background: var(--bg-cream);
+}
+.concept-visual {
+  position: sticky;
+  top: 100px;
+  overflow: hidden;
+}
+.concept-visual img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  transition: transform 1.4s var(--ease);
+}
+.concept-visual:hover img { transform: scale(1.04); }
+.concept-visual-caption {
+  margin-top: 16px;
+  font-family: var(--sans-en);
+  font-size: 11px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  text-align: right;
+}
+
+/* =========================================================
+   Philosophy Section
+========================================================= */
+.philosophy {
+  background: var(--bg-cream);
+  position: relative;
+}
+.philosophy::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(201, 168, 92, 0.04) 0%, transparent 60%),
+    radial-gradient(circle at 80% 70%, rgba(123, 79, 31, 0.03) 0%, transparent 60%);
+  pointer-events: none;
+}
+.philosophy .section-header {
+  text-align: center;
+}
+.philosophy .heading-jp {
+  font-size: clamp(24px, 3.2vw, 38px);
+  letter-spacing: 0.16em;
+}
+.philosophy-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(48px, 5vw, 72px);
+}
+@media (min-width: 800px) {
+  .philosophy-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.phil-item {
+  position: relative;
+  text-align: left;
+}
+.phil-num {
+  font-family: var(--serif-en);
+  font-size: 56px;
+  font-weight: 200;
+  font-style: italic;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.phil-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  margin-bottom: 28px;
+  position: relative;
+}
+.phil-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.4s var(--ease);
+}
+.phil-img.farmer img { object-position: center 30%; }
+.phil-item:hover .phil-img img { transform: scale(1.06); }
+.phil-item h3 {
+  font-family: var(--serif-en);
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--chestnut-deep);
+  margin-bottom: 8px;
+}
+.phil-item .ja-label {
+  font-family: var(--serif-jp);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.4em;
+  color: var(--text-soft);
+  margin-bottom: 16px;
+}
+.phil-item p {
+  font-family: var(--serif-jp);
+  font-size: 14px;
+  line-height: 2.1;
+  color: var(--text-body);
+  font-weight: 300;
+}
+
+/* =========================================================
+   Patissier Section
+========================================================= */
+.patissier {
+  background: var(--bg-darker);
+  color: var(--text-light);
+  position: relative;
+  overflow: hidden;
+}
+.patissier::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse at 70% 50%, rgba(201, 168, 92, 0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+.patissier .section-num { color: var(--gold); }
+.patissier .eyebrow {
+  color: var(--gold-light);
+  border-bottom-color: var(--gold);
+}
+.patissier .heading-jp { color: var(--text-light); }
+.patissier .heading-en { color: var(--text-light); }
+.patissier-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(48px, 6vw, 96px);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .patissier-grid { grid-template-columns: 1.05fr 1fr; }
+}
+.patissier-img {
+  position: relative;
+}
+.patissier-img img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  filter: brightness(0.95) contrast(1.05);
+}
+.patissier-text .heading-jp {
+  font-size: clamp(20px, 2.4vw, 28px);
+  margin-bottom: 32px;
+}
+.patissier-text p {
+  font-family: var(--serif-jp);
+  font-size: 14px;
+  line-height: 2.2;
+  color: var(--text-light);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  margin-bottom: 1.4em;
+  opacity: 0.92;
+}
+.patissier-name {
+  font-family: var(--serif-en);
+  font-size: clamp(28px, 3vw, 38px);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--gold-light);
+  margin-top: 32px;
+}
+.patissier-name-jp {
+  font-family: var(--serif-jp);
+  font-size: 14px;
+  letter-spacing: 0.4em;
+  color: var(--text-light);
+  font-weight: 300;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+
+/* =========================================================
+   Grand Prix Section
+========================================================= */
+.grandprix {
+  background: var(--bg-pure);
+  position: relative;
+  overflow: hidden;
+}
+.grandprix::before {
+  content: '';
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  top: 20%;
+  right: -10%;
+  background: radial-gradient(circle, rgba(201, 168, 92, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.grandprix-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(48px, 6vw, 80px);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .grandprix-grid { grid-template-columns: 1fr 1fr; }
+}
+.grandprix-text .eyebrow {
+  margin-bottom: 28px;
+}
+.grandprix-title {
+  font-family: var(--serif-en);
+  font-size: clamp(56px, 9vw, 110px);
+  font-weight: 200;
+  font-style: italic;
+  line-height: 0.95;
+  color: var(--chestnut-deep);
+  margin-bottom: 20px;
+}
+.grandprix-title em {
+  color: var(--gold);
+  font-style: italic;
+}
+.grandprix-jp {
+  font-family: var(--serif-jp);
+  font-size: clamp(16px, 2vw, 22px);
+  font-weight: 300;
+  line-height: 2;
+  color: var(--text-primary);
+  margin-bottom: 28px;
+  letter-spacing: 0.12em;
+}
+.grandprix-desc {
+  font-family: var(--serif-jp);
+  font-size: 14px;
+  line-height: 2.2;
+  color: var(--text-body);
+  font-weight: 300;
+  margin-bottom: 36px;
+  letter-spacing: 0.06em;
+}
+.grandprix-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 22px;
+  padding: 22px 28px;
+  border: 1px solid var(--gold);
+  position: relative;
+  background: var(--bg-cream);
+}
+.grandprix-badge::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1px solid var(--gold-pale);
+  pointer-events: none;
+}
+.badge-year {
+  font-family: var(--serif-en);
+  font-size: clamp(40px, 5vw, 56px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--gold);
+  line-height: 1;
+}
+.badge-text {
+  font-family: var(--serif-jp);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-primary);
+  letter-spacing: 0.1em;
+  line-height: 1.85;
+}
+.grandprix-img-wrap {
+  position: relative;
+}
+.grandprix-img-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border: 1px solid var(--gold);
+  z-index: 1;
+  pointer-events: none;
+  transition: inset 0.6s var(--ease);
+}
+.grandprix-img-wrap:hover::before { inset: 6px; }
+.grandprix-img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  filter: saturate(1.05);
+}
+
+/* =========================================================
+   Parfait Collection (Masonry)
+========================================================= */
+.parfait-collection {
+  background: var(--bg-cream);
+  padding: var(--section-gap) 0;
+}
+.parfait-collection .section-header {
+  text-align: center;
+  margin-bottom: clamp(48px, 6vw, 80px);
+}
+.parfait-collection .heading-jp {
+  font-size: clamp(22px, 2.8vw, 32px);
+  margin-bottom: 12px;
+}
+.parfait-collection .subtitle {
+  font-family: var(--sans-en);
+  font-size: 12px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  margin-top: 8px;
+}
+.masonry {
+  column-count: 2;
+  column-gap: 14px;
+}
+@media (min-width: 600px) { .masonry { column-count: 3; } }
+@media (min-width: 1000px) { .masonry { column-count: 4; } }
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 14px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  background: var(--bg-cream);
+}
+.masonry-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 1.2s var(--ease), filter 0.6s var(--ease);
+}
+.masonry-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(15, 8, 5, 0.0) 0%, rgba(15, 8, 5, 0.0) 100%);
+  transition: background 0.6s var(--ease);
+  pointer-events: none;
+}
+.masonry-item:hover img { transform: scale(1.05); }
+.masonry-item:hover::after {
+  background: linear-gradient(0deg, rgba(15, 8, 5, 0.25) 0%, rgba(15, 8, 5, 0) 60%);
+}
+
+/* =========================================================
+   Gallery Section
+========================================================= */
+.gallery {
+  background: var(--bg-pure);
+  padding: var(--section-gap) 0;
+}
+.gallery .section-header { text-align: center; }
+.gallery-filter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: clamp(40px, 5vw, 60px);
+  padding: 4px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.gallery-filter button {
+  font-family: var(--sans-en);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  padding: 14px 22px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.4s var(--ease);
+  position: relative;
+}
+.gallery-filter button:hover { color: var(--chestnut); }
+.gallery-filter button.active { color: var(--chestnut-deep); }
+.gallery-filter button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 16px;
+  right: 16px;
+  height: 1px;
+  background: var(--gold);
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+@media (min-width: 600px) { .gallery-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1000px) { .gallery-grid { grid-template-columns: repeat(4, 1fr); } }
+.gallery-item {
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  background: var(--bg-cream);
+}
+.gallery-item.tall { aspect-ratio: 1/1.4; }
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s var(--ease);
+}
+.gallery-item:hover img { transform: scale(1.06); }
+.gallery-item.hidden { display: none; }
+
+/* =========================================================
+   OEM Section
+========================================================= */
+.oem {
+  background: var(--chestnut-dark);
+  color: var(--text-light);
+  position: relative;
+  overflow: hidden;
+}
+.oem::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse at 30% 30%, rgba(232, 200, 122, 0.10) 0%, transparent 60%);
+  pointer-events: none;
+}
+.oem .eyebrow { color: var(--gold-light); border-bottom-color: var(--gold); }
+.oem .heading-jp { color: var(--text-light); }
+.oem-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(40px, 5vw, 80px);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .oem-grid { grid-template-columns: 1fr 1fr; }
+}
+.oem-text .heading-jp {
+  font-size: clamp(22px, 2.8vw, 32px);
+  margin-bottom: 24px;
+}
+.oem-text p {
+  font-family: var(--serif-jp);
+  font-size: 14px;
+  line-height: 2.2;
+  color: var(--text-light);
+  font-weight: 300;
+  margin-bottom: 1.4em;
+  opacity: 0.9;
+}
+.oem-features {
+  list-style: none;
+  margin-top: 32px;
+}
+.oem-features li {
+  font-family: var(--serif-jp);
+  font-size: 14px;
+  padding: 14px 0;
+  border-top: 1px solid rgba(232, 200, 122, 0.25);
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  letter-spacing: 0.06em;
+}
+.oem-features li:last-child { border-bottom: 1px solid rgba(232, 200, 122, 0.25); }
+.oem-features li::before {
+  content: '✦';
+  color: var(--gold-light);
+  font-size: 14px;
+}
+.oem-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 36px;
+  background: var(--gold-light);
+  color: var(--chestnut-dark);
+  font-family: var(--sans-en);
+  font-size: 12px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 36px;
+  transition: all 0.5s var(--ease);
+  border: 1px solid var(--gold-light);
+}
+.oem-cta:hover {
+  background: transparent;
+  color: var(--gold-light);
+}
+.oem-cta::after {
+  content: '→';
+  transition: transform 0.4s var(--ease);
+}
+.oem-cta:hover::after { transform: translateX(6px); }
+
+/* =========================================================
+   Contact Form
+========================================================= */
+.contact {
+  background: var(--bg-pure);
+}
+.contact .section-header { text-align: center; }
+.form-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.form-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 40px;
+  border: 1px solid var(--line);
+}
+.form-tab {
+  flex: 1;
+  padding: 16px 12px;
+  background: var(--bg-cream);
+  font-family: var(--serif-jp);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-mute);
+  cursor: pointer;
+  letter-spacing: 0.1em;
+  transition: all 0.4s var(--ease);
+  border-right: 1px solid var(--line);
+}
+.form-tab:last-child { border-right: none; }
+.form-tab.active {
+  background: var(--chestnut-deep);
+  color: var(--gold-light);
+}
+.form-tab:not(.active):hover {
+  background: var(--bg-warm);
+  color: var(--chestnut);
+}
+.form-panel { display: none; }
+.form-panel.active { display: block; }
+.form-row { margin-bottom: 24px; }
+.form-row.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 600px) {
+  .form-row.split { grid-template-columns: 1fr; }
+}
+.form-row label {
+  display: block;
+  font-family: var(--serif-jp);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  letter-spacing: 0.1em;
+}
+.form-row label .req {
+  color: var(--chestnut);
+  font-size: 10px;
+  margin-left: 6px;
+}
+.form-row input,
+.form-row select,
+.form-row textarea {
+  width: 100%;
+  padding: 14px 16px;
+  font-family: var(--sans-jp);
+  font-size: 14px;
+  color: var(--text-primary);
+  background: var(--bg-cream);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  transition: border-color 0.3s var(--ease);
+}
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  background: var(--bg-pure);
+}
+.form-row textarea {
+  resize: vertical;
+  min-height: 130px;
+  line-height: 1.7;
+}
+.form-submit {
+  width: 100%;
+  padding: 18px;
+  background: var(--chestnut-deep);
+  color: var(--gold-light);
+  font-family: var(--sans-en);
+  font-size: 12px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--chestnut-deep);
+  margin-top: 16px;
+  transition: all 0.4s var(--ease);
+}
+.form-submit:hover {
+  background: transparent;
+  color: var(--chestnut-deep);
+}
+.form-note {
+  font-family: var(--serif-jp);
+  font-size: 12px;
+  color: var(--text-mute);
+  text-align: center;
+  margin-top: 20px;
+  line-height: 1.8;
+}
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 48px 24px;
+  background: var(--bg-cream);
+  border: 1px solid var(--gold);
+}
+.form-success.visible { display: block; }
+.form-success h3 {
+  font-family: var(--serif-jp);
+  font-size: 18px;
+  color: var(--chestnut-deep);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+.form-success p {
+  font-family: var(--serif-jp);
+  font-size: 13px;
+  color: var(--text-body);
+}
+
+/* =========================================================
+   Recruit Section
+========================================================= */
+.recruit {
+  background: var(--bg-cream);
+  text-align: center;
+}
+.recruit-inner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+.recruit .heading-jp {
+  font-size: clamp(22px, 2.6vw, 30px);
+  margin-bottom: 24px;
+}
+.recruit p {
+  font-family: var(--serif-jp);
+  font-size: 14px;
+  line-height: 2.1;
+  color: var(--text-body);
+  margin-bottom: 32px;
+  font-weight: 300;
+}
+.recruit-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 40px;
+  background: transparent;
+  color: var(--chestnut-deep);
+  font-family: var(--sans-en);
+  font-size: 12px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: 1px solid var(--chestnut-deep);
+  transition: all 0.5s var(--ease);
+}
+.recruit-cta:hover {
+  background: var(--chestnut-deep);
+  color: var(--gold-light);
+}
+.recruit-cta::after {
+  content: '→';
+  transition: transform 0.4s var(--ease);
+}
+.recruit-cta:hover::after { transform: translateX(6px); }
+
+/* =========================================================
+   Footer
+========================================================= */
+.footer {
+  background: var(--bg-darker);
+  color: var(--text-light);
+  padding: 80px 0 32px;
+  border-top: 1px solid var(--gold);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  margin-bottom: 56px;
+}
+@media (min-width: 800px) {
+  .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; gap: 64px; }
+}
+.footer-logo img {
+  width: 160px;
+  height: auto;
+  margin-bottom: 24px;
+}
+.footer-tagline {
+  font-family: var(--serif-jp);
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text-light);
+  opacity: 0.8;
+  line-height: 2;
+  letter-spacing: 0.1em;
+}
+.footer h4 {
+  font-family: var(--sans-en);
+  font-size: 11px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.footer ul { list-style: none; }
+.footer ul li {
+  margin-bottom: 12px;
+}
+.footer ul a {
+  font-family: var(--serif-jp);
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text-light);
+  opacity: 0.85;
+  transition: opacity 0.4s var(--ease), color 0.4s var(--ease);
+  letter-spacing: 0.06em;
+}
+.footer ul a:hover {
+  opacity: 1;
+  color: var(--gold-light);
+}
+.footer-bottom {
+  border-top: 1px solid rgba(232, 200, 122, 0.2);
+  padding-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-family: var(--sans-en);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  color: var(--text-light);
+  opacity: 0.6;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   Lightbox
+========================================================= */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 8, 5, 0.96);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  cursor: pointer;
+}
+.lightbox.active { display: flex; }
+.lightbox img {
+  max-width: 90%;
+  max-height: 90vh;
+  object-fit: contain;
+  cursor: default;
+}
+.lb-close {
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  font-family: var(--sans-en);
+  font-size: 14px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  cursor: pointer;
+  padding: 12px 20px;
+  border: 1px solid var(--gold);
+  background: transparent;
+  transition: all 0.3s var(--ease);
+}
+.lb-close:hover { background: var(--gold); color: var(--bg-darker); }
+
+@media (max-width: 720px) {
+  .nav-cta { display: none; }
+  .hero { min-height: 600px; }
+}
+</style>
+
+</head>
+<body>
+
+<header class="header" id="header">
+  <a href="#top" class="header-logo" aria-label="Oliodo. ホーム">
+    <img src="images/logo-dark.png" alt="Oliodo.">
+  </a>
+  <button class="menu-btn" id="menuBtn" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav" id="nav">
+    <a href="#concept">コンセプト</a>
+    <a href="#philosophy">哲学</a>
+    <a href="#patissier">パティシエ</a>
+    <a href="#award">受賞</a>
+    <a href="#gallery">ギャラリー</a>
+    <a href="#oem" class="nav-cta">OEM相談</a>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-slides">
+    <div class="hero-slide active" style="background-image:url('images/hero1.jpg');"></div>
+    <div class="hero-slide" style="background-image:url('images/hero2.jpg');"></div>
+    <div class="hero-slide" style="background-image:url('images/hero3.jpg');"></div>
+    <div class="hero-slide" style="background-image:url('images/hero4.jpg');"></div>
+    <div class="hero-slide" style="background-image:url('images/hero5.jpg');"></div>
+  </div>
+  <div class="hero-dots" id="heroDots">
+    <span class="hero-dot active" data-slide="0"></span>
+    <span class="hero-dot" data-slide="1"></span>
+    <span class="hero-dot" data-slide="2"></span>
+    <span class="hero-dot" data-slide="3"></span>
+    <span class="hero-dot" data-slide="4"></span>
+  </div>
+  <div class="hero-inner">
+    <img src="images/logo-cream.png" alt="Oliodo." class="hero-logo">
+    <p class="hero-jp">金木犀の香りのように、<br>静かに心に残る菓子を。</p>
+    <p class="hero-jp-sub">いつもの日常に、ひと口のご褒美を。</p>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-inner">
+    <span>Olivier odorant</span><span>Period.</span><span>Seasonal Craft</span><span>金木犀の香り</span><span>人生の節目に</span><span>Olivier odorant</span><span>Period.</span><span>Seasonal Craft</span><span>金木犀の香り</span><span>人生の節目に</span>
+  </div>
+</div>
+
+<section class="section statement">
+  <div class="content">
+    <p class="statement-text reveal">
+      食の必需ではなく、<em>心の余白</em>を彩るもの。<br>
+      楽しみになり、記憶となり、<br>時に感動と幸福を添えるもの。
+    </p>
+    <div class="statement-divider reveal reveal-d1"></div>
+    <p class="statement-text reveal reveal-d2" style="font-size:clamp(15px,1.6vw,18px); line-height:2.2;">
+      Oliodo.のお菓子が、<br>誰かの笑顔や幸せへと繋がっていきますように。
+    </p>
+  </div>
+</section>
+
+<section class="section concept" id="concept">
+  <span class="section-num reveal">— 01 / Concept</span>
+  <div class="content">
+    <div class="concept-grid">
+      <div class="concept-text reveal">
+        <span class="eyebrow">Brand Story</span>
+        <h2 class="heading-jp" style="font-size:clamp(22px,2.6vw,32px); margin-bottom:32px;">ふたつの言葉に、<br>ふたつの想いを。</h2>
+        <p class="lead">Oliodo.（オリオド.）</p>
+        <p>フランス語の Olivier odorant（金木犀） と Period.（終止符） を組み合わせた造語です。</p>
+        <p>金木犀「Olivier odorant」は、季節の移ろいを繊細に知らせ、記憶を呼び覚ます花。<br>誰もがふと「心地よい」と感じる、柔らかな香と存在感。<br>その佇まいのように、Oliodo.は、静かに心に残る菓子を目指します。</p>
+        <p>もうひとつの語源「Period.」は、人生に訪れるさまざまな区切りを象徴します。<br>誕生、祝福、旅立ち、労い、休息。<br>大小さまざまな人生の節目に、Oliodo.のお菓子を食べたいと思ってもらえるように。</p>
+        <div class="pull-quote">
+          そして人生の最後の節目にさえ、<br>「このお菓子がいい」<br>と選んでもらえたら。
+        </div>
+        <p>少し大げさですが、そんな想いを込めています。</p>
+      </div>
+      <div class="concept-visual reveal reveal-d1">
+        <img src="images/canele.jpg" alt="Cannele de Bordeaux">
+        <p class="concept-visual-caption">— Signature / Cannele</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section philosophy" id="philosophy">
+  <span class="section-num reveal">— 02 / Philosophy</span>
+  <div class="content">
+    <div class="section-header reveal">
+      <span class="eyebrow">Our Philosophy</span>
+      <h2 class="heading-jp">Oliodo.が大切にしていること。</h2>
+    </div>
+    <div class="philosophy-grid">
+      <article class="phil-item reveal">
+        <div class="phil-num">01</div>
+        <div class="phil-img"><img src="images/grape.jpg" alt="季節の素材" loading="lazy"></div>
+        <h3>Seasonal.</h3>
+        <p class="ja-label">季 節 の 素 材</p>
+        <p>旬の素材を通じて、時間と記憶に寄り添うお菓子を。素材の力を引き出すことに、誠実でありたい。</p>
+      </article>
+      <article class="phil-item reveal reveal-d1">
+        <div class="phil-num">02</div>
+        <div class="phil-img"><img src="images/patissier-pour.jpg" alt="職人の手仕事" loading="lazy"></div>
+        <h3>Craftsmanship.</h3>
+        <p class="ja-label">職 人 の 手 仕 事</p>
+        <p>常に創造と技術を磨き続ける。一つひとつの工程に、菓子作りへの探究心を込めて。</p>
+      </article>
+      <article class="phil-item reveal reveal-d2">
+        <div class="phil-num">03</div>
+        <div class="phil-img farmer"><img src="images/farmer.jpg" alt="生産者への感謝" loading="lazy"></div>
+        <h3>Gratitude.</h3>
+        <p class="ja-label">繋 ぐ こ と へ の 感 謝</p>
+        <p>素材を育てる方、お菓子を届ける方、味わう方。すべての繋がりへの感謝を、ものづくりに込めて。</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section patissier" id="patissier">
+  <span class="section-num reveal">— 03 / Patissier</span>
+  <div class="content">
+    <div class="patissier-grid">
+      <div class="patissier-img reveal">
+        <img src="images/patissier-counter.jpg" alt="パティシエ 佐藤 亘" loading="lazy">
+      </div>
+      <div class="patissier-text reveal reveal-d1">
+        <span class="eyebrow">Patissier</span>
+        <h2 class="heading-jp">ひと皿に、<br>その日の物語を。</h2>
+        <p>カウンターの向こう側で、ひと皿ひと皿に向き合う時間。<br>素材の声を聴き、季節の気配を感じながら、<br>その日にしか生まれない一品を仕立てる。</p>
+        <p>派手な装飾ではなく、静かな手仕事の積み重ねが、<br>やがて誰かの記憶のひとかけらになる。<br>そう信じて、今日も厨房に立っています。</p>
+        <p class="patissier-name">Wataru Sato.</p>
+        <p class="patissier-name-jp">佐 藤   亘</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section grandprix" id="award">
+  <span class="section-num reveal">— 04 / Award</span>
+  <div class="content">
+    <div class="grandprix-grid">
+      <div class="grandprix-text reveal">
+        <span class="eyebrow">2025 Osaka Expo</span>
+        <h2 class="grandprix-title"><em>Grand Prix.</em></h2>
+        <p class="grandprix-jp">大阪・関西万博<br>「日本の宝物パフェグランプリ」受賞</p>
+        <p class="grandprix-desc">2025年、大阪・関西万博にて開催された<br>「日本の宝物パフェグランプリ」。<br>選び抜いた素材と、職人の手仕事が織りなす一杯が、<br>多くの方々に味わっていただく機会となりました。</p>
+        <div class="grandprix-badge">
+          <span class="badge-year">2025</span>
+          <span class="badge-text">Grand Prix<br>日本の宝物<br>パフェグランプリ</span>
+        </div>
+      </div>
+      <div class="grandprix-img-wrap reveal reveal-d1">
+        <img class="grandprix-img" src="images/grandprix.jpg" alt="グランプリ受賞パフェ" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section parfait-collection" id="parfait">
+  <span class="section-num reveal">— 05 / Parfait</span>
+  <div class="content">
+    <div class="section-header reveal">
+      <span class="eyebrow">Parfait Collection</span>
+      <h2 class="heading-jp">グラスの中の、<br>ひとつの庭。</h2>
+      <p class="subtitle">A Garden in Glass</p>
+    </div>
+    <div class="masonry">
+      <div class="masonry-item reveal"><img src="images/pf-grandprix2.jpg" alt="グランプリパフェ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-pistachio2.jpg" alt="ピスタチオパフェ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-cherry5.jpg" alt="さくらんぼパフェ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-white.jpg" alt="白いちごパフェ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-pear1.jpg" alt="洋梨パフェ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-choco-or3.jpg" alt="チョコ×オレンジパフェ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-matcha2.jpg" alt="抹茶パフェ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-peach2.jpg" alt="桃パフェ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-cherry1.jpg" alt="さくらんぼパフェ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-pistachio3.jpg" alt="ピスタチオパフェ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-pear2.jpg" alt="洋梨パフェ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-choco1.jpg" alt="チョコパフェ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-cherry3.jpg" alt="さくらんぼパフェ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-matcha-cu.jpg" alt="抹茶パフェ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-pear-cu.jpg" alt="洋梨パフェ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-pistachio1.jpg" alt="ピスタチオパフェ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-peach1.jpg" alt="桃パフェ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-choco2.jpg" alt="チョコパフェ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-cherry4.jpg" alt="さくらんぼパフェ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-matcha1.jpg" alt="抹茶パフェ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-choco-or1.jpg" alt="チョコオレンジ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-cherry2.jpg" alt="さくらんぼパフェ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-pear3.jpg" alt="洋梨パフェ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-grandprix3.jpg" alt="グランプリパフェ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-choco-or2.jpg" alt="チョコオレンジ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-peach-cu.jpg" alt="桃パフェ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-matcha3.jpg" alt="抹茶パフェ" loading="lazy"></div>
+      <div class="masonry-item reveal"><img src="images/pf-cherry6.jpg" alt="さくらんぼパフェ" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section gallery" id="gallery">
+  <span class="section-num reveal">— 06 / Gallery</span>
+  <div class="content">
+    <div class="section-header reveal"><span class="eyebrow">Archive</span><h2 class="heading-jp">Oliodo.のしごと、<br>季節の便り。</h2></div>
+    <div class="gallery-filter reveal"><button data-filter="all" class="active">すべて</button><button data-filter="baked">焼き菓子</button><button data-filter="chocolate">ショコラ</button><button data-filter="cake">ケーキ</button><button data-filter="parfait">パフェ</button></div>
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-item tall reveal" data-cat="baked"><img src="images/baked-canele1.jpg" alt="Baked" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="baked"><img src="images/baked-galette1.jpg" alt="Baked" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="baked"><img src="images/baked-financier.jpg" alt="Baked" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="baked"><img src="images/baked-canele-matcha.jpg" alt="Baked" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="baked"><img src="images/baked-canele-brown.jpg" alt="Baked" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="baked"><img src="images/baked-canele-choco.jpg" alt="Baked" loading="lazy"></div>
+      <div class="gallery-item tall reveal" data-cat="baked"><img src="images/baked-canele-assort.jpg" alt="Baked" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="baked"><img src="images/baked-canele-top.jpg" alt="Baked" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="baked"><img src="images/baked-galette2.jpg" alt="Baked" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="baked"><img src="images/baked-canele-wood.jpg" alt="Baked" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="baked"><img src="images/baked-tigre1.jpg" alt="Baked" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="baked"><img src="images/baked-tigre-top.jpg" alt="Baked" loading="lazy"></div>
+      <div class="gallery-item tall reveal" data-cat="baked"><img src="images/baked-canele-pile.jpg" alt="Baked" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="chocolate"><img src="images/choco-dot1.jpg" alt="Chocolate" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="chocolate"><img src="images/choco-bonbon1.jpg" alt="Chocolate" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="chocolate"><img src="images/choco-box1.jpg" alt="Chocolate" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="chocolate"><img src="images/choco-terrine.jpg" alt="Chocolate" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="chocolate"><img src="images/choco-box2.jpg" alt="Chocolate" loading="lazy"></div>
+      <div class="gallery-item tall reveal" data-cat="chocolate"><img src="images/choco-dot2.jpg" alt="Chocolate" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="cake"><img src="images/cake-fruit-event.jpg" alt="Cake" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="cake"><img src="images/cake-anniv.jpg" alt="Cake" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="cake"><img src="images/cake-buffet1.jpg" alt="Cake" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="cake"><img src="images/cake-buffet2.jpg" alt="Cake" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="cake"><img src="images/cake-buffet3.jpg" alt="Cake" loading="lazy"></div>
+      <div class="gallery-item tall reveal" data-cat="cake"><img src="images/cake-terrine-eg.jpg" alt="Cake" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="cake"><img src="images/cake-terrine-choco.jpg" alt="Cake" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="cake"><img src="images/cake-matcha-slice.jpg" alt="Cake" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="cake"><img src="images/cake-stollen1.jpg" alt="Cake" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="cake"><img src="images/cake-stollen2.jpg" alt="Cake" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="cake"><img src="images/cake-short.jpg" alt="Cake" loading="lazy"></div>
+      <div class="gallery-item tall reveal" data-cat="parfait"><img src="images/pf-grandprix2.jpg" alt="Parfait" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="parfait"><img src="images/pf-pistachio2.jpg" alt="Parfait" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="parfait"><img src="images/pf-cherry5.jpg" alt="Parfait" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="parfait"><img src="images/pf-white.jpg" alt="Parfait" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="parfait"><img src="images/pf-pear1.jpg" alt="Parfait" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="parfait"><img src="images/pf-choco-or3.jpg" alt="Parfait" loading="lazy"></div>
+      <div class="gallery-item tall reveal" data-cat="parfait"><img src="images/pf-matcha2.jpg" alt="Parfait" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="parfait"><img src="images/pf-peach2.jpg" alt="Parfait" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="parfait"><img src="images/pf-cherry1.jpg" alt="Parfait" loading="lazy"></div>
+      <div class="gallery-item reveal" data-cat="parfait"><img src="images/pf-pistachio3.jpg" alt="Parfait" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section oem" id="oem">
+  <span class="section-num reveal" style="color:var(--gold-light);">— 07 / OEM</span>
+  <div class="content">
+    <div class="oem-grid">
+      <div class="oem-text reveal">
+        <span class="eyebrow">OEM / Custom Order</span>
+        <h2 class="heading-jp">あなたのブランドに、<br>Oliodo.の手仕事を。</h2>
+        <p>カフェ、レストラン、ホテル、ブランドギフトなど、<br>法人様向けにオーダーメイドのお菓子をお届けしています。</p>
+        <p>素材選びからレシピ開発、パッケージのご相談まで、<br>ブランドの世界観に寄り添ったご提案をいたします。</p>
+        <ul class="oem-features">
+          <li>少量から大量まで柔軟に対応</li>
+          <li>オリジナルレシピ・パッケージ開発</li>
+          <li>国産・季節素材へのこだわり</li>
+          <li>ブランド世界観に合わせた仕上げ</li>
+        </ul>
+        <a href="#contact" class="oem-cta">OEMのご相談はこちら</a>
+      </div>
+      <div class="oem-text reveal reveal-d1">
+        <div style="background:rgba(232,200,122,0.08);padding:40px;border:1px solid rgba(232,200,122,0.3);">
+          <h3 style="font-family:var(--serif-jp);font-size:18px;color:var(--gold-light);margin-bottom:20px;letter-spacing:0.12em;">主な実績</h3>
+          <p style="font-family:var(--serif-jp);font-size:14px;line-height:2.1;color:var(--text-light);opacity:0.9;">
+            ・ホテル向けアフタヌーンティー菓子<br>
+            ・カフェ・レストランへの卸<br>
+            ・ブランドノベルティ・ギフト<br>
+            ・季節限定商品の共同開発<br>
+            ・ウェディング・記念日ケーキ
+          </p>
+          <div style="margin-top:28px;padding-top:24px;border-top:1px solid rgba(232,200,122,0.2);">
+            <p style="font-family:var(--serif-en);font-style:italic;font-size:18px;color:var(--gold-light);">"Stories you can taste."</p>
+            <p style="font-family:var(--serif-jp);font-size:12px;color:var(--text-light);opacity:0.7;margin-top:6px;letter-spacing:0.1em;">— 物語を、味として届ける。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section contact" id="contact">
+  <span class="section-num reveal">— 08 / Contact</span>
+  <div class="content">
+    <div class="section-header reveal">
+      <span class="eyebrow">Contact</span>
+      <h2 class="heading-jp">お問い合わせ</h2>
+      <p style="font-family:var(--serif-jp);font-size:14px;color:var(--text-mute);margin-top:16px;line-height:1.9;">ご相談内容に合わせて、下記のタブをお選びください。</p>
+    </div>
+    <div class="form-wrap reveal reveal-d1">
+      <div class="form-tabs">
+        <div class="form-tab active" data-tab="oem">OEM・卸</div>
+        <div class="form-tab" data-tab="corporate">法人ギフト</div>
+        <div class="form-tab" data-tab="personal">個人</div>
+      </div>
+      <form class="form-panel active" data-panel="oem" onsubmit="return submitForm(event,'oem');">
+        <div class="form-row split"><div><label>会社名・屋号 <span class="req">必須</span></label><input type="text" name="company" required></div><div><label>ご担当者名 <span class="req">必須</span></label><input type="text" name="name" required></div></div>
+        <div class="form-row split"><div><label>メールアドレス <span class="req">必須</span></label><input type="email" name="email" required></div><div><label>電話番号</label><input type="tel" name="phone"></div></div>
+        <div class="form-row"><label>ご相談内容 <span class="req">必須</span></label><select name="type" required><option value="">— ご選択ください —</option><option>OEM・商品開発のご相談</option><option>卸・継続取引のご相談</option><option>イベント・催事のご相談</option><option>その他</option></select></div>
+        <div class="form-row"><label>ご希望数量・予算感（任意）</label><input type="text" name="volume" placeholder="例：月100個程度／単価500円台希望"></div>
+        <div class="form-row"><label>詳細・ご希望 <span class="req">必須</span></label><textarea name="message" required placeholder="商品イメージ、納品時期、その他ご要望をお聞かせください。"></textarea></div>
+        <button type="submit" class="form-submit">送信する</button>
+        <p class="form-note">送信後、3営業日以内にご返信いたします。</p>
+      </form>
+      <form class="form-panel" data-panel="corporate" onsubmit="return submitForm(event,'corporate');">
+        <div class="form-row split"><div><label>会社名・団体名 <span class="req">必須</span></label><input type="text" name="company" required></div><div><label>ご担当者名 <span class="req">必須</span></label><input type="text" name="name" required></div></div>
+        <div class="form-row split"><div><label>メールアドレス <span class="req">必須</span></label><input type="email" name="email" required></div><div><label>電話番号</label><input type="tel" name="phone"></div></div>
+        <div class="form-row"><label>ギフト用途 <span class="req">必須</span></label><select name="purpose" required><option value="">— ご選択ください —</option><option>記念品・ノベルティ</option><option>お中元・お歳暮</option><option>周年・式典</option><option>結婚式・引き出物</option><option>その他</option></select></div>
+        <div class="form-row split"><div><label>ご希望数量</label><input type="text" name="quantity" placeholder="例：50個"></div><div><label>ご希望納期</label><input type="text" name="due" placeholder="例：3ヶ月後"></div></div>
+        <div class="form-row"><label>詳細・ご希望 <span class="req">必須</span></label><textarea name="message" required placeholder="ご予算、メッセージ、パッケージのご要望などをお聞かせください。"></textarea></div>
+        <button type="submit" class="form-submit">送信する</button>
+        <p class="form-note">送信後、3営業日以内にご返信いたします。</p>
+      </form>
+      <form class="form-panel" data-panel="personal" onsubmit="return submitForm(event,'personal');">
+        <div class="form-row"><label>お名前 <span class="req">必須</span></label><input type="text" name="name" required></div>
+        <div class="form-row split"><div><label>メールアドレス <span class="req">必須</span></label><input type="email" name="email" required></div><div><label>電話番号</label><input type="tel" name="phone"></div></div>
+        <div class="form-row"><label>ご相談内容 <span class="req">必須</span></label><select name="type" required><option value="">— ご選択ください —</option><option>オーダーメイドケーキ</option><option>誕生日・記念日のご相談</option><option>ウェディングケーキ</option><option>商品について</option><option>その他</option></select></div>
+        <div class="form-row"><label>ご希望日（任意）</label><input type="date" name="date"></div>
+        <div class="form-row"><label>ご相談内容 <span class="req">必須</span></label><textarea name="message" required placeholder="ご希望のサイズ、デザイン、お渡し場所などをお聞かせください。"></textarea></div>
+        <button type="submit" class="form-submit">送信する</button>
+        <p class="form-note">ECサイト（<a href="https://oliodo0901.base.shop/" target="_blank" style="color:var(--chestnut);text-decoration:underline;">こちら</a>）でも商品をご購入いただけます。</p>
+      </form>
+      <div class="form-success" id="formSuccess"><h3>お問い合わせを受け付けました</h3><p>ご連絡ありがとうございます。<br>3営業日以内にご返信いたします。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section recruit" id="recruit">
+  <span class="section-num reveal">— 09 / Career</span>
+  <div class="content">
+    <div class="recruit-inner">
+      <span class="eyebrow reveal">Career</span>
+      <h2 class="heading-jp reveal">Oliodo.で、<br>共に菓子を仕立てる仲間へ。</h2>
+      <p class="reveal reveal-d1">職人としての技術を磨きたい方、<br>素材と季節に向き合いながら、<br>静かに丁寧な仕事を積み重ねたい方を歓迎しています。</p>
+      <a href="#" class="recruit-cta reveal reveal-d2" onclick="document.getElementById('careerModal').classList.add('active');return false;">採用情報を見る</a>
+    </div>
+  </div>
+</section>
+<div class="lightbox" id="careerModal" style="background:rgba(15,8,5,0.92);">
+  <div style="background:var(--bg-pure);max-width:680px;width:100%;padding:48px clamp(24px,4vw,56px);max-height:90vh;overflow-y:auto;cursor:default;" onclick="event.stopPropagation();">
+    <div style="text-align:center;margin-bottom:32px;"><span class="eyebrow">Recruitment</span><h3 class="heading-jp" style="font-size:24px;margin-top:8px;">採用エントリー</h3></div>
+    <form onsubmit="return submitCareer(event);">
+      <div class="form-row"><label>お名前 <span class="req">必須</span></label><input type="text" name="name" required></div>
+      <div class="form-row split"><div><label>メール <span class="req">必須</span></label><input type="email" name="email" required></div><div><label>電話番号</label><input type="tel" name="phone"></div></div>
+      <div class="form-row"><label>応募職種 <span class="req">必須</span></label><select name="position" required><option value="">— ご選択ください —</option><option>パティシエ（経験者）</option><option>パティシエ（未経験・見習い）</option><option>製造アシスタント</option><option>販売・接客</option><option>その他</option></select></div>
+      <div class="form-row"><label>志望動機・自己PR <span class="req">必須</span></label><textarea name="motivation" required placeholder="Oliodo.へのご応募理由、これまでのご経験、菓子作りへの想いなどをお聞かせください。"></textarea></div>
+      <button type="submit" class="form-submit">エントリーする</button>
+      <p class="form-note">受付後、担当者よりご連絡いたします。</p>
+    </form>
+    <button class="lb-close" style="margin:24px auto 0;display:block;background:transparent;color:var(--chestnut);border-color:var(--chestnut);" onclick="document.getElementById('careerModal').classList.remove('active');">閉じる</button>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="content">
+    <div class="footer-grid">
+      <div class="footer-logo">
+        <img src="images/logo-cream.png" alt="Oliodo.">
+        <p class="footer-tagline">金木犀の香りのように、<br>静かに心に残る菓子を。</p>
+      </div>
+      <div><h4>Navigation</h4><ul>
+        <li><a href="#concept">コンセプト</a></li>
+        <li><a href="#philosophy">哲学</a></li>
+        <li><a href="#patissier">パティシエ</a></li>
+        <li><a href="#award">受賞</a></li>
+        <li><a href="#parfait">パフェ</a></li>
+        <li><a href="#gallery">ギャラリー</a></li>
+      </ul></div>
+      <div><h4>Contact</h4><ul>
+        <li><a href="https://oliodo0901.base.shop/" target="_blank">オンラインショップ</a></li>
+        <li><a href="#oem">OEM・卸のご相談</a></li>
+        <li><a href="#contact">お問い合わせ</a></li>
+        <li><a href="#recruit">採用情報</a></li>
+        <li><a href="mailto:w.sato@oliodo.com">w.sato@oliodo.com</a></li>
+        <li><a href="tel:08082099208">080-8209-9208</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Oliodo. All Rights Reserved.</span>
+      <span>Patissier Wataru Sato</span>
+    </div>
+  </div>
+</footer>
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="document.getElementById('lightbox').classList.remove('active');">Close ×</button>
+  <img src="" alt="">
+</div>
+
+<script>
+const header=document.getElementById('header');
+window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>40));
+const menuBtn=document.getElementById('menuBtn'),nav=document.getElementById('nav');
+menuBtn.addEventListener('click',()=>{menuBtn.classList.toggle('active');nav.classList.toggle('active');});
+nav.addEventListener('click',e=>{if(e.target.tagName==='A'){menuBtn.classList.remove('active');nav.classList.remove('active');}});
+const slides=document.querySelectorAll('.hero-slide'),dots=document.querySelectorAll('.hero-dot');
+let cur=0;
+function showSlide(i){slides.forEach((s,j)=>s.classList.toggle('active',j===i));dots.forEach((d,j)=>d.classList.toggle('active',j===i));cur=i;}
+let si=setInterval(()=>showSlide((cur+1)%slides.length),5500);
+dots.forEach((d,i)=>d.addEventListener('click',()=>{clearInterval(si);showSlide(i);si=setInterval(()=>showSlide((cur+1)%slides.length),5500);}));
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');obs.unobserve(e.target);}}),{threshold:0.12,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+document.querySelectorAll('.gallery-filter button').forEach(btn=>btn.addEventListener('click',()=>{
+  document.querySelectorAll('.gallery-filter button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const f=btn.dataset.filter;
+  document.querySelectorAll('.gallery-item').forEach(item=>item.classList.toggle('hidden',f!=='all'&&item.dataset.cat!==f));
+}));
+const lb=document.getElementById('lightbox'),lbImg=lb.querySelector('img');
+document.querySelectorAll('.gallery-item img,.masonry-item img').forEach(img=>{
+  img.addEventListener('click',e=>{e.stopPropagation();lbImg.src=img.src;lb.classList.add('active');});
+});
+lb.addEventListener('click',e=>{if(e.target===lb||e.target.classList.contains('lb-close'))lb.classList.remove('active');});
+document.getElementById('careerModal').addEventListener('click',e=>{if(e.target.id==='careerModal')e.currentTarget.classList.remove('active');});
+document.querySelectorAll('.form-tab').forEach(tab=>tab.addEventListener('click',()=>{
+  const t=tab.dataset.tab;
+  document.querySelectorAll('.form-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.form-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('formSuccess').classList.remove('visible');
+  tab.classList.add('active');
+  document.querySelector(`.form-panel[data-panel="${t}"]`).classList.add('active');
+}));
+function submitForm(e,type){
+  e.preventDefault();
+  const data=new FormData(e.target);
+  const labels={oem:'OEM・卸',corporate:'法人ギフト',personal:'個人'};
+  let body=`[${labels[type]}のお問い合わせ]\n\n`;
+  for(const [k,v] of data.entries())body+=`${k}: ${v}\n`;
+  window.location.href=`mailto:w.sato@oliodo.com?subject=${encodeURIComponent('[Oliodo.] '+labels[type])}&body=${encodeURIComponent(body)}`;
+  document.querySelectorAll('.form-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('formSuccess').classList.add('visible');
+  return false;
+}
+function submitCareer(e){
+  e.preventDefault();
+  const data=new FormData(e.target);
+  let body='[採用エントリー]\n\n';
+  for(const [k,v] of data.entries())body+=`${k}: ${v}\n`;
+  window.location.href=`mailto:w.sato@oliodo.com?subject=${encodeURIComponent('[Oliodo. 採用エントリー]')}&body=${encodeURIComponent(body)}`;
+  alert('エントリーを送信します。');
+  document.getElementById('careerModal').classList.remove('active');
+  return false;
+}
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const id=a.getAttribute('href');
+    if(id==='#'||id.length<2)return;
+    const t=document.querySelector(id);
+    if(t){e.preventDefault();window.scrollTo({top:t.offsetTop-60,behavior:'smooth'});}
+  });
+});
+</script>
+</body>
+</html>
