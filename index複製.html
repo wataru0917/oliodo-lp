@@ -10,50 +10,7 @@
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<!-- フォントpreload（Tier 2 - パフォーマンス改善 / FOIT回避） -->
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lato:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@200;300;400;500&family=Noto+Serif+JP:wght@200;300;400;500;600&display=swap">
-
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lato:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@200;300;400;500&family=Noto+Serif+JP:wght@200;300;400;500;600&display=swap" rel="stylesheet">
-
-<!-- JSON-LD 構造化データ（Tier 2 - SEO強化） -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Bakery",
-  "name": "Patisserie Oliodo",
-  "alternateName": "Oliodo.",
-  "image": "https://www.oliodo.com/images/og.jpg",
-  "url": "https://www.oliodo.com",
-  "telephone": "+81-80-8209-9208",
-  "email": "w.sato@oliodo.com",
-  "description": "Olivier odorant × Period. パティシエ佐藤亘による焼き菓子と洋菓子のブランド。人生の節目に寄り添う、ひと粒の物語。",
-  "founder": {
-    "@type": "Person",
-    "name": "佐藤 亘",
-    "alternateName": "Wataru Sato",
-    "jobTitle": "Patissier"
-  },
-  "award": [
-    "2025 大阪・関西万博 日本の宝物パフェグランプリ"
-  ]
-}
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "佐藤 亘",
-  "alternateName": "Wataru Sato",
-  "jobTitle": "Patissier",
-  "worksFor": {
-    "@type": "Bakery",
-    "name": "Patisserie Oliodo"
-  },
-  "award": "2025 大阪・関西万博 日本の宝物パフェグランプリ"
-}
-</script>
 
 <style>
 /* =========================================================
@@ -62,7 +19,7 @@
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
 :root {
-  /* ===== Surface ===== */
+  /* Brand Colors */
   --bg-pure:       #FFFFFF;
   --bg-cream:      #FAF7F2;
   --bg-warm:       #F5EDE0;
@@ -70,38 +27,27 @@
   --bg-dark:       #1A0F08;
   --bg-darker:     #0F0805;
 
-  /* ===== Text（A11y改善: mute/soft をAAA寄りに） ===== */
+  /* Text */
   --text-primary:  #2C1A0A;
   --text-body:     #3D2614;
-  --text-mute:     #5C4D3C;   /* ← #6B5A47 から変更（コントラスト 7.0:1 → 9.5:1 へ） */
-  --text-soft:     #6B5A47;   /* ← #8B7459 から変更（コントラスト 5.4:1 → 7.0:1 へ） */
+  --text-mute:     #6B5A47;
+  --text-soft:     #8B7459;
   --text-light:    #FAF7F2;
   --text-cream:    #E8C87A;
 
-  /* ===== Brand Accent（chestnut系はそのまま、goldは3階層化） ===== */
+  /* Brand Accent */
   --chestnut:      #7B4F1F;
   --chestnut-deep: #5A3815;
   --chestnut-dark: #3A2410;
-
-  /* Gold 3階層 */
-  --gold-primary:  #C9A85C;   /* CTAボタン、awardバッジ、grandprix-titleのem などの強アクセント専用 */
-  --gold-muted:   #B89549;   /* eyebrow border, hero-scroll, ナビhover下線 */
-  --gold-soft:    rgba(201, 168, 92, 0.45); /* 装飾線・border のみ */
-
-  /* 後方互換エイリアス（既存class壊さない） */
-  --gold:          var(--gold-primary);
+  --gold:          #C9A85C;
   --gold-light:    #E8C87A;
   --gold-pale:     #F0E0B8;
 
-  /* ===== Lines ===== */
+  /* Lines */
   --line:          #E5DACA;
   --line-soft:     #F0E8D8;
-  --line-strong:   var(--gold-primary);
+  --line-strong:   #C9A85C;
   --line-dark:     #3A2410;
-
-  /* ===== Semantic（フォームのバリデーション用、新規追加） ===== */
-  --color-error:   #B85450;   /* くすんだ赤、ブランドトーン維持 */
-  --color-success: #7C8B5A;   /* 成功用、彩度抑えめ */
 
   /* Typography */
   --serif-en: 'Cormorant Garamond', 'Times New Roman', serif;
@@ -133,75 +79,6 @@ body {
 img { display: block; max-width: 100%; height: auto; }
 a { color: inherit; text-decoration: none; transition: color 0.4s var(--ease); }
 button { font-family: inherit; cursor: pointer; border: none; background: none; }
-
-/* =========================================================
-   A11y: Focus Management（追加 / Tier 1）
-========================================================= */
-*:focus { outline: none; } /* デフォルト青枠を消す */
-
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible,
-[tabindex]:focus-visible {
-  outline: 2px solid var(--chestnut);
-  outline-offset: 4px;
-  border-radius: 0; /* 角丸ゼロのブランド一貫性 */
-  transition: outline-offset 0.2s var(--ease);
-}
-
-/* ライト背景上のフォームフィールドは inset shadow 併用で視認性UP */
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-  outline-offset: 2px;
-  box-shadow: 0 0 0 3px rgba(123, 79, 31, 0.12);
-}
-
-/* ダーク背景セクション（patissier, oem, footer）用は gold-light で */
-.patissier a:focus-visible,
-.oem a:focus-visible,
-.footer a:focus-visible,
-.patissier button:focus-visible,
-.oem button:focus-visible,
-.footer button:focus-visible {
-  outline-color: var(--gold-light);
-}
-
-/* visually-hidden ユーティリティ（スクリーンリーダー専用） */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* Skip link（キーボードユーザー / スクリーンリーダー対応） */
-.skip-link {
-  position: absolute;
-  top: -100px;
-  left: 16px;
-  z-index: 9999;
-  padding: 12px 24px;
-  background: var(--chestnut-deep);
-  color: var(--gold-light);
-  font-family: var(--sans-en);
-  font-size: 12px;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  text-decoration: none;
-  font-weight: 600;
-  transition: top 0.3s var(--ease);
-}
-.skip-link:focus {
-  top: 16px;
-}
 
 /* =========================================================
    Utility / Section Base
@@ -456,57 +333,6 @@ textarea:focus-visible {
   opacity: 0;
   animation: heroFadeIn 1.4s var(--ease-out) 1.4s forwards;
   margin-bottom: 48px;
-}
-
-/* Hero Credentials バッジ（追加 / Tier 2 - 5秒テスト改善） */
-.hero-credentials {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  margin-top: 12px;
-  padding: 12px 22px;
-  font-family: var(--sans-en);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.36em;
-  text-transform: uppercase;
-  color: var(--text-light);
-  text-decoration: none;
-  border: 1px solid rgba(232, 200, 122, 0.55);
-  background: rgba(15, 8, 5, 0.25);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  opacity: 0;
-  animation: heroFadeIn 1.4s var(--ease-out) 1.7s forwards;
-  transition: border-color 0.4s var(--ease), background 0.4s var(--ease);
-}
-.hero-credentials:hover {
-  border-color: var(--gold-light);
-  background: rgba(15, 8, 5, 0.45);
-}
-.cred-year {
-  font-family: var(--serif-en);
-  font-style: italic;
-  font-size: 14px;
-  letter-spacing: 0.1em;
-  color: var(--gold-light);
-  font-weight: 400;
-}
-.cred-divider {
-  color: var(--gold-light);
-  opacity: 0.5;
-}
-.cred-text {
-  /* デフォルトのスタイルを継承 */
-}
-@media (max-width: 600px) {
-  .hero-credentials {
-    font-size: 9px;
-    letter-spacing: 0.28em;
-    padding: 10px 16px;
-    gap: 10px;
-  }
-  .cred-year { font-size: 12px; }
 }
 .hero-scroll {
   position: absolute;
@@ -1040,53 +866,6 @@ textarea:focus-visible {
   background: linear-gradient(0deg, rgba(15, 8, 5, 0.25) 0%, rgba(15, 8, 5, 0) 60%);
 }
 
-/* Award バッジ重ね（追加 / Tier 2 - グランプリの記憶強化） */
-.masonry-item--award {
-  position: relative;
-}
-.masonry-badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px 14px;
-  background: rgba(15, 8, 5, 0.82);
-  border: 1px solid var(--gold-primary);
-  pointer-events: none;
-  transition: opacity 0.4s var(--ease);
-}
-.masonry-item--award:hover .masonry-badge {
-  opacity: 0.92;
-}
-.masonry-badge-year {
-  font-family: var(--serif-en);
-  font-style: italic;
-  font-size: 12px;
-  letter-spacing: 0.16em;
-  color: var(--gold-light);
-  margin-bottom: 2px;
-}
-.masonry-badge-text {
-  font-family: var(--sans-en);
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--text-light);
-}
-@media (max-width: 600px) {
-  .masonry-badge {
-    top: 8px;
-    left: 8px;
-    padding: 6px 10px;
-  }
-  .masonry-badge-year { font-size: 10px; }
-  .masonry-badge-text { font-size: 7px; letter-spacing: 0.24em; }
-}
-
 /* =========================================================
    Gallery Section
 ========================================================= */
@@ -1544,22 +1323,17 @@ textarea:focus-visible {
   .hero { min-height: 600px; }
 }
 
-
-
-
 /* =========================================================
-   Bubble Gallery v3 (ダイナミック漂流)
+   Bubble Gallery (フウセン浮遊)
 ========================================================= */
 .bubble-field {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: clamp(24px, 3vw, 48px);
-  padding: 60px 0 100px;
+  gap: clamp(8px, 1.5vw, 24px);
+  padding: 20px 0;
   position: relative;
-  perspective: 1200px;
-  min-height: 600px;
 }
 
 .bubble {
@@ -1569,19 +1343,20 @@ textarea:focus-visible {
   cursor: pointer;
   flex-shrink: 0;
   opacity: 0;
-  flex-shrink: 0;
+  transform: translateY(40px) scale(0.6);
+  transition: opacity 1.2s var(--ease-out), transform 1.2s var(--ease-out);
+  transition-delay: var(--delay, 0s);
   box-shadow:
-    0 16px 40px rgba(58, 36, 16, 0.20),
-    0 6px 12px rgba(58, 36, 16, 0.12),
-    inset 0 0 60px rgba(255, 255, 255, 0.14);
+    0 8px 24px rgba(58, 36, 16, 0.12),
+    0 2px 6px rgba(58, 36, 16, 0.08),
+    inset 0 0 40px rgba(255, 255, 255, 0.1);
   will-change: transform, opacity;
 }
 
-/* 出現時：appearアニメーション → 続けてdriftアニメーションを発動 */
 .bubble.is-visible {
-  animation:
-    appear 1.4s var(--ease-out) var(--appear, 0s) forwards,
-    drift var(--ddur, 12s) ease-in-out calc(var(--appear, 0s) + 1.4s + var(--ddelay, 0s)) infinite;
+  opacity: 1;
+  transform: translateY(0) scale(1) rotate(var(--rot, 0deg));
+  animation: floatGently var(--float-dur, 6s) ease-in-out var(--float-delay, 0s) infinite;
 }
 
 .bubble img {
@@ -1593,170 +1368,59 @@ textarea:focus-visible {
 }
 
 .bubble:hover {
-  z-index: 30;
-  animation-play-state: paused;
+  z-index: 10;
 }
 .bubble:hover img {
-  transform: scale(1.18);
-  filter: brightness(1.1) saturate(1.15);
+  transform: scale(1.12);
+  filter: brightness(1.05) saturate(1.1);
 }
 
-/* ハイライト */
 .bubble::after {
   content: '';
   position: absolute;
   top: 8%;
   left: 12%;
-  width: 32%;
-  height: 28%;
-  background: radial-gradient(ellipse at center, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0) 70%);
+  width: 28%;
+  height: 24%;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0) 70%);
   border-radius: 50%;
   pointer-events: none;
   z-index: 2;
 }
 
-/* サイズ */
-.bubble-s { width: clamp(120px, 14vw, 180px); height: clamp(120px, 14vw, 180px); }
-.bubble-m { width: clamp(170px, 20vw, 260px); height: clamp(170px, 20vw, 260px); }
-.bubble-l { width: clamp(220px, 26vw, 340px); height: clamp(220px, 26vw, 340px); }
+/* サイズバリエーション */
+.bubble-s  { width: clamp(80px, 10vw, 130px);  height: clamp(80px, 10vw, 130px); }
+.bubble-m  { width: clamp(110px, 14vw, 180px); height: clamp(110px, 14vw, 180px); }
+.bubble-l  { width: clamp(140px, 18vw, 230px); height: clamp(140px, 18vw, 230px); }
+.bubble-xl { width: clamp(180px, 22vw, 280px); height: clamp(180px, 22vw, 280px); }
 
 @media (max-width: 720px) {
-  .bubble-s { width: 100px; height: 100px; }
-  .bubble-m { width: 140px; height: 140px; }
-  .bubble-l { width: 180px; height: 180px; }
-  .bubble-field { gap: 16px; padding: 40px 0 60px; min-height: 400px; }
+  .bubble-s  { width: 70px;  height: 70px; }
+  .bubble-m  { width: 95px;  height: 95px; }
+  .bubble-l  { width: 125px; height: 125px; }
+  .bubble-xl { width: 155px; height: 155px; }
+  .bubble-field { gap: 8px; }
 }
 
-/* 出現アニメーション */
-@keyframes appear {
-  from {
-    opacity: 0;
-    transform: translateY(60px) scale(0.4);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, 0) scale(1);
-  }
-}
-
-/* 漂流アニメーション - ダイナミックに動く */
-@keyframes drift {
-  0% {
-    opacity: 1;
-    transform: translate(0, 0) scale(1) rotate(0deg);
-  }
-  20% {
-    transform: translate(var(--dx1, 0), var(--dy1, 0)) scale(1.06) rotate(var(--rot1, 0deg));
-  }
-  40% {
-    transform: translate(var(--dx2, 0), var(--dy2, 0)) scale(0.94) rotate(var(--rot2, 0deg));
-  }
-  60% {
-    transform: translate(var(--dx3, 0), var(--dy3, 0)) scale(1.04) rotate(calc(var(--rot1, 0deg) * -0.5));
-  }
-  80% {
-    transform: translate(calc(var(--dx1, 0) * -0.7), calc(var(--dy3, 0) * 0.8)) scale(0.96) rotate(calc(var(--rot2, 0deg) * 0.6));
-  }
-  100% {
-    opacity: 1;
-    transform: translate(0, 0) scale(1) rotate(0deg);
-  }
-}
-
-/* =========================================================
-   Reduced Motion 対応（追加 / Tier 1 must）
-   WCAG 2.3.3 完全対応。前庭障害・乗り物酔い体質ユーザー保護
-========================================================= */
-@media (prefers-reduced-motion: reduce) {
-  /* Reveal は最終位置で固定 */
-  .reveal {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-
-  /* Marquee は完全停止して折り返し全表示 */
-  .marquee-inner {
-    animation: none !important;
-    transform: none !important;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100% !important;
-    gap: 24px;
-    padding: 0 var(--content-pad);
-    white-space: normal;
-  }
-
-  /* Hero スライドショーは初期スライドで固定（自動切替なし） */
-  .hero-slide {
-    transition: none !important;
-  }
-
-  /* Hero ロゴ・テキスト・Scroll の登場アニメーション → 即座に表示 */
-  .hero-logo,
-  .hero-jp,
-  .hero-jp-sub,
-  .hero-scroll,
-  .hero-dots {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  /* Scroll indicator の線パルスは停止 */
-  .hero-scroll::after {
-    animation: none !important;
-    transform: scaleY(1);
-    opacity: 0.6;
-  }
-
-  /* Bubble Gallery: 出現アニメ→静止、漂流→完全停止 */
-  .bubble {
-    opacity: 1 !important;
-    transform: none !important;
-    animation: none !important;
-  }
-  .bubble.is-visible {
-    animation: none !important;
-  }
-
-  /* hover ズーム類は無効化 */
-  .gallery-item img,
-  .masonry-item img,
-  .phil-img img,
-  .bubble:hover img,
-  .grandprix-img-wrap:hover::before,
-  .concept-visual:hover img {
-    transition: none !important;
-    transform: none !important;
-    filter: none !important;
-  }
-
-  /* それ以外のアニメーション・トランジションも極小化（最終手段） */
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
+/* ふわふわ浮遊アニメーション */
+@keyframes floatGently {
+  0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+  50%      { transform: translateY(-12px) rotate(calc(var(--rot, 0deg) * -1)); }
 }
 
 </style>
 
 </head>
 <body>
-<a href="#main" class="skip-link">メインコンテンツへスキップ</a>
 
-<header class="header" id="header" role="banner">
+<header class="header" id="header">
   <a href="#top" class="header-logo" aria-label="Oliodo. ホーム">
     <img src="images/logo-dark.png" alt="Oliodo.">
   </a>
-  <button class="menu-btn" id="menuBtn" aria-label="メニューを開閉" aria-expanded="false" aria-controls="nav">
+  <button class="menu-btn" id="menuBtn" aria-label="メニュー">
     <span></span><span></span><span></span>
   </button>
-  <nav class="nav" id="nav" role="navigation" aria-label="メインナビゲーション">
+  <nav class="nav" id="nav">
     <a href="#concept">コンセプト</a>
     <a href="#philosophy">哲学</a>
     <a href="#patissier">パティシエ</a>
@@ -1765,8 +1429,6 @@ textarea:focus-visible {
     <a href="#oem" class="nav-cta">OEM相談</a>
   </nav>
 </header>
-
-<main id="main">
 
 <section class="hero" id="top">
   <div class="hero-slides">
@@ -1787,11 +1449,6 @@ textarea:focus-visible {
     <img src="images/logo-cream.png" alt="Oliodo." class="hero-logo">
     <p class="hero-jp">金木犀の香りのように、<br>静かに心に残る菓子を。</p>
     <p class="hero-jp-sub">いつもの日常に、ひと口のご褒美を。</p>
-    <a href="#award" class="hero-credentials" aria-label="2025年 大阪・関西万博 グランプリ受賞 詳細を見る">
-      <span class="cred-year">2025</span>
-      <span class="cred-divider" aria-hidden="true">·</span>
-      <span class="cred-text">大阪・関西万博 グランプリ</span>
-    </a>
   </div>
   <div class="hero-scroll">Scroll</div>
 </section>
@@ -1921,7 +1578,7 @@ textarea:focus-visible {
       <p class="subtitle">A Garden in Glass</p>
     </div>
     <div class="masonry">
-      <div class="masonry-item masonry-item--award reveal"><img src="images/pf-grandprix2.jpg" alt="2025年 大阪・関西万博 グランプリ受賞パフェ" loading="lazy"><span class="masonry-badge"><span class="masonry-badge-year">2025</span><span class="masonry-badge-text">Grand Prix</span></span></div>
+      <div class="masonry-item reveal"><img src="images/pf-grandprix2.jpg" alt="グランプリパフェ" loading="lazy"></div>
       <div class="masonry-item reveal"><img src="images/pf-pistachio2.jpg" alt="ピスタチオパフェ" loading="lazy"></div>
       <div class="masonry-item reveal"><img src="images/pf-cherry5.jpg" alt="さくらんぼパフェ" loading="lazy"></div>
       <div class="masonry-item reveal"><img src="images/pf-white.jpg" alt="白いちごパフェ" loading="lazy"></div>
@@ -1962,26 +1619,56 @@ textarea:focus-visible {
       <p style="font-family:var(--sans-en); font-size:11px; letter-spacing:0.36em; text-transform:uppercase; color:var(--text-mute); margin-top:16px;">A Garden of Memories</p>
     </div>
     <div class="bubble-field" id="bubbleField">
-      <div class="bubble bubble-m" style="--appear:0.67s; --dx1:23px; --dy1:29px; --dx2:-5px; --dy2:40px; --dx3:98px; --dy3:60px; --rot1:4deg; --rot2:10deg; --ddur:9.1s; --ddelay:4.8s;"><img src="images/pf-matcha1.jpg" alt="" loading="lazy"></div>
-      <div class="bubble bubble-s" style="--appear:0.55s; --dx1:-6px; --dy1:-13px; --dx2:-84px; --dy2:-67px; --dx3:17px; --dy3:87px; --rot1:-1deg; --rot2:5deg; --ddur:11.8s; --ddelay:3.6s;"><img src="images/cake-terrine-eg.jpg" alt="" loading="lazy"></div>
-      <div class="bubble bubble-l" style="--appear:1.23s; --dx1:46px; --dy1:-50px; --dx2:39px; --dy2:-87px; --dx3:92px; --dy3:45px; --rot1:4deg; --rot2:-15deg; --ddur:8.4s; --ddelay:0.2s;"><img src="images/pf-pear2.jpg" alt="" loading="lazy"></div>
-      <div class="bubble bubble-l" style="--appear:0.93s; --dx1:-37px; --dy1:22px; --dx2:31px; --dy2:-40px; --dx3:12px; --dy3:-31px; --rot1:-1deg; --rot2:5deg; --ddur:11.8s; --ddelay:3.0s;"><img src="images/baked-tigre-top.jpg" alt="" loading="lazy"></div>
-      <div class="bubble bubble-s" style="--appear:0.79s; --dx1:21px; --dy1:-69px; --dx2:61px; --dy2:-25px; --dx3:-40px; --dy3:-32px; --rot1:-12deg; --rot2:-3deg; --ddur:11.1s; --ddelay:0.2s;"><img src="images/cake-buffet3.jpg" alt="" loading="lazy"></div>
-      <div class="bubble bubble-s" style="--appear:1.27s; --dx1:-46px; --dy1:8px; --dx2:-103px; --dy2:-86px; --dx3:96px; --dy3:85px; --rot1:0deg; --rot2:-3deg; --ddur:8.0s; --ddelay:1.3s;"><img src="images/cake-stollen1.jpg" alt="" loading="lazy"></div>
-      <div class="bubble bubble-l" style="--appear:0.12s; --dx1:-19px; --dy1:17px; --dx2:-102px; --dy2:54px; --dx3:41px; --dy3:-40px; --rot1:-5deg; --rot2:-15deg; --ddur:12.7s; --ddelay:1.6s;"><img src="images/pf-pear3.jpg" alt="" loading="lazy"></div>
-      <div class="bubble bubble-l" style="--appear:0.68s; --dx1:74px; --dy1:-60px; --dx2:-86px; --dy2:-27px; --dx3:60px; --dy3:-65px; --rot1:6deg; --rot2:2deg; --ddur:8.1s; --ddelay:2.8s;"><img src="images/pf-pistachio3.jpg" alt="" loading="lazy"></div>
-      <div class="bubble bubble-s" style="--appear:1.39s; --dx1:10px; --dy1:-42px; --dx2:67px; --dy2:-57px; --dx3:-13px; --dy3:74px; --rot1:-15deg; --rot2:-7deg; --ddur:10.3s; --ddelay:2.4s;"><img src="images/pf-cherry4.jpg" alt="" loading="lazy"></div>
-      <div class="bubble bubble-l" style="--appear:0.9s; --dx1:85px; --dy1:61px; --dx2:-43px; --dy2:-85px; --dx3:-67px; --dy3:-43px; --rot1:-12deg; --rot2:-14deg; --ddur:10.4s; --ddelay:5.1s;"><img src="images/cake-short.jpg" alt="" loading="lazy"></div>
-      <div class="bubble bubble-l" style="--appear:0.1s; --dx1:-66px; --dy1:23px; --dx2:-54px; --dy2:-88px; --dx3:77px; --dy3:66px; --rot1:-13deg; --rot2:-9deg; --ddur:10.0s; --ddelay:1.8s;"><img src="images/baked-galette1.jpg" alt="" loading="lazy"></div>
-      <div class="bubble bubble-m" style="--appear:0.68s; --dx1:-58px; --dy1:-87px; --dx2:33px; --dy2:4px; --dx3:-25px; --dy3:69px; --rot1:3deg; --rot2:-11deg; --ddur:10.7s; --ddelay:5.8s;"><img src="images/pf-matcha3.jpg" alt="" loading="lazy"></div>
-      <div class="bubble bubble-l" style="--appear:0.27s; --dx1:-74px; --dy1:70px; --dx2:-81px; --dy2:-11px; --dx3:112px; --dy3:-32px; --rot1:8deg; --rot2:5deg; --ddur:12.9s; --ddelay:1.5s;"><img src="images/pf-cherry2.jpg" alt="" loading="lazy"></div>
-      <div class="bubble bubble-l" style="--appear:0.05s; --dx1:-70px; --dy1:85px; --dx2:-21px; --dy2:33px; --dx3:34px; --dy3:-70px; --rot1:15deg; --rot2:-7deg; --ddur:10.5s; --ddelay:0.6s;"><img src="images/pf-choco-or1.jpg" alt="" loading="lazy"></div>
-      <div class="bubble bubble-s" style="--appear:1.3s; --dx1:60px; --dy1:10px; --dx2:-55px; --dy2:17px; --dx3:90px; --dy3:62px; --rot1:-13deg; --rot2:-11deg; --ddur:10.9s; --ddelay:3.1s;"><img src="images/pf-cherry1.jpg" alt="" loading="lazy"></div>
-      <div class="bubble bubble-s" style="--appear:0.29s; --dx1:23px; --dy1:77px; --dx2:98px; --dy2:67px; --dx3:37px; --dy3:-72px; --rot1:-15deg; --rot2:-13deg; --ddur:9.7s; --ddelay:5.5s;"><img src="images/pf-grandprix3.jpg" alt="" loading="lazy"></div>
-      <div class="bubble bubble-s" style="--appear:0.18s; --dx1:-6px; --dy1:-27px; --dx2:-105px; --dy2:-79px; --dx3:-75px; --dy3:-18px; --rot1:-4deg; --rot2:-11deg; --ddur:10.2s; --ddelay:3.4s;"><img src="images/baked-canele-matcha.jpg" alt="" loading="lazy"></div>
-      <div class="bubble bubble-l" style="--appear:1.29s; --dx1:-36px; --dy1:78px; --dx2:67px; --dy2:86px; --dx3:13px; --dy3:59px; --rot1:0deg; --rot2:14deg; --ddur:13.7s; --ddelay:3.5s;"><img src="images/cake-stollen2.jpg" alt="" loading="lazy"></div>
-      <div class="bubble bubble-m" style="--appear:0.45s; --dx1:-41px; --dy1:-82px; --dx2:-115px; --dy2:63px; --dx3:42px; --dy3:-71px; --rot1:-13deg; --rot2:-13deg; --ddur:10.9s; --ddelay:4.4s;"><img src="images/pf-peach1.jpg" alt="" loading="lazy"></div>
-      <div class="bubble bubble-m" style="--appear:1.26s; --dx1:-26px; --dy1:-79px; --dx2:110px; --dy2:90px; --dx3:-87px; --dy3:-3px; --rot1:12deg; --rot2:12deg; --ddur:10.1s; --ddelay:4.1s;"><img src="images/baked-canele-pile.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:0.21s; --float-dur:6.6s; --float-delay:0.4s; --rot:0.2deg;"><img src="images/pf-matcha1.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:0.08s; --float-dur:6.0s; --float-delay:0.2s; --rot:-0.4deg;"><img src="images/cake-fruit-event.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.13s; --float-dur:5.7s; --float-delay:4.1s; --rot:-2.3deg;"><img src="images/pf-pear2.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.88s; --float-dur:7.8s; --float-delay:2.9s; --rot:-0.6deg;"><img src="images/baked-tigre-top.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-xl" style="--delay:0.07s; --float-dur:7.4s; --float-delay:1.4s; --rot:-2.1deg;"><img src="images/choco-dot1.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.43s; --float-dur:7.3s; --float-delay:0.9s; --rot:0.5deg;"><img src="images/cake-buffet1.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:0.52s; --float-dur:6.2s; --float-delay:0.3s; --rot:-2.6deg;"><img src="images/pf-pear3.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.95s; --float-dur:5.7s; --float-delay:1.6s; --rot:0.5deg;"><img src="images/pf-pistachio3.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:0.42s; --float-dur:7.2s; --float-delay:3.5s; --rot:-1.5deg;"><img src="images/pf-cherry4.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:0.74s; --float-dur:7.5s; --float-delay:3.6s; --rot:-1.3deg;"><img src="images/cake-anniv.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-xl" style="--delay:0.17s; --float-dur:5.7s; --float-delay:3.8s; --rot:-2.1deg;"><img src="images/baked-galette1.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:0.05s; --float-dur:6.7s; --float-delay:3.8s; --rot:0.4deg;"><img src="images/pf-matcha3.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-l" style="--delay:0.44s; --float-dur:6.8s; --float-delay:3.0s; --rot:0.5deg;"><img src="images/pf-cherry2.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:1.18s; --float-dur:7.8s; --float-delay:2.4s; --rot:1.0deg;"><img src="images/pf-choco-or1.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.98s; --float-dur:6.6s; --float-delay:5.0s; --rot:1.9deg;"><img src="images/pf-cherry1.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.54s; --float-dur:6.7s; --float-delay:0.1s; --rot:-0.2deg;"><img src="images/pf-grandprix3.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.16s; --float-dur:4.2s; --float-delay:3.8s; --rot:-2.2deg;"><img src="images/baked-canele-matcha.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.55s; --float-dur:7.5s; --float-delay:0.4s; --rot:-0.3deg;"><img src="images/cake-buffet2.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:1.24s; --float-dur:7.3s; --float-delay:4.3s; --rot:-1.3deg;"><img src="images/pf-peach1.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:0.5s; --float-dur:7.5s; --float-delay:4.8s; --rot:-2.1deg;"><img src="images/baked-canele-pile.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.32s; --float-dur:4.9s; --float-delay:2.4s; --rot:0.5deg;"><img src="images/cake-terrine-eg.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.01s; --float-dur:5.7s; --float-delay:1.8s; --rot:0.4deg;"><img src="images/baked-galette2.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-xl" style="--delay:0.97s; --float-dur:6.1s; --float-delay:3.1s; --rot:1.1deg;"><img src="images/pf-choco1.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:1.26s; --float-dur:7.1s; --float-delay:4.4s; --rot:1.8deg;"><img src="images/cake-buffet3.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:0.56s; --float-dur:4.4s; --float-delay:3.2s; --rot:-2.6deg;"><img src="images/pf-white.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.29s; --float-dur:4.6s; --float-delay:1.7s; --rot:-2.7deg;"><img src="images/cake-matcha-slice.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.21s; --float-dur:4.4s; --float-delay:1.8s; --rot:-2.8deg;"><img src="images/baked-canele-assort.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-l" style="--delay:0.86s; --float-dur:4.6s; --float-delay:1.3s; --rot:-0.9deg;"><img src="images/pf-peach2.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:0.17s; --float-dur:7.4s; --float-delay:5.0s; --rot:-0.2deg;"><img src="images/cake-short.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:0.12s; --float-dur:4.4s; --float-delay:1.7s; --rot:-1.4deg;"><img src="images/pf-pear-cu.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-l" style="--delay:0.23s; --float-dur:4.1s; --float-delay:4.8s; --rot:0.2deg;"><img src="images/choco-terrine.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.76s; --float-dur:4.1s; --float-delay:2.6s; --rot:2.9deg;"><img src="images/cake-terrine-choco.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-l" style="--delay:0.97s; --float-dur:5.0s; --float-delay:1.8s; --rot:-2.0deg;"><img src="images/pf-choco-or3.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-l" style="--delay:0.75s; --float-dur:7.1s; --float-delay:1.6s; --rot:-1.7deg;"><img src="images/cake-stollen1.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-l" style="--delay:1.38s; --float-dur:7.4s; --float-delay:4.0s; --rot:1.9deg;"><img src="images/baked-tigre1.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-l" style="--delay:0.32s; --float-dur:6.1s; --float-delay:1.8s; --rot:-2.8deg;"><img src="images/pf-cherry6.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.39s; --float-dur:5.0s; --float-delay:3.5s; --rot:2.7deg;"><img src="images/pf-grandprix2.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:1.31s; --float-dur:8.0s; --float-delay:4.8s; --rot:-0.8deg;"><img src="images/pf-cherry3.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.32s; --float-dur:4.8s; --float-delay:1.0s; --rot:0.7deg;"><img src="images/pf-pear1.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-xl" style="--delay:1.18s; --float-dur:5.9s; --float-delay:3.3s; --rot:1.8deg;"><img src="images/choco-bonbon1.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.92s; --float-dur:7.6s; --float-delay:3.9s; --rot:1.5deg;"><img src="images/pf-matcha2.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:0.25s; --float-dur:7.2s; --float-delay:1.7s; --rot:1.8deg;"><img src="images/pf-pistachio2.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-xl" style="--delay:0.55s; --float-dur:5.6s; --float-delay:4.7s; --rot:1.3deg;"><img src="images/baked-canele-choco.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.18s; --float-dur:4.6s; --float-delay:4.5s; --rot:1.8deg;"><img src="images/cake-stollen2.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:1.16s; --float-dur:7.9s; --float-delay:3.3s; --rot:-0.9deg;"><img src="images/pf-choco-or2.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:0.18s; --float-dur:4.1s; --float-delay:4.9s; --rot:0.9deg;"><img src="images/baked-canele-top.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:1.31s; --float-dur:5.7s; --float-delay:4.4s; --rot:2.0deg;"><img src="images/pf-cherry5.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.35s; --float-dur:5.2s; --float-delay:1.2s; --rot:0.5deg;"><img src="images/pf-matcha-cu.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-s" style="--delay:0.59s; --float-dur:4.5s; --float-delay:4.6s; --rot:-0.9deg;"><img src="images/baked-canele-wood.jpg" alt="" loading="lazy"></div>
+      <div class="bubble bubble-m" style="--delay:0.82s; --float-dur:7.6s; --float-delay:2.1s; --rot:2.5deg;"><img src="images/pf-pistachio1.jpg" alt="" loading="lazy"></div>
     </div>
   </div>
 </section>
@@ -2038,29 +1725,29 @@ textarea:focus-visible {
         <div class="form-tab" data-tab="personal">個人</div>
       </div>
       <form class="form-panel active" data-panel="oem" onsubmit="return submitForm(event,'oem');">
-        <div class="form-row split"><div><label for="oem-company">会社名・屋号 <span class="req" aria-label="必須項目">必須</span></label><input type="text" id="oem-company" name="company" required aria-required="true"></div><div><label for="oem-name">ご担当者名 <span class="req" aria-label="必須項目">必須</span></label><input type="text" id="oem-name" name="name" required aria-required="true"></div></div>
-        <div class="form-row split"><div><label for="oem-email">メールアドレス <span class="req" aria-label="必須項目">必須</span></label><input type="email" id="oem-email" name="email" required aria-required="true" autocomplete="email"></div><div><label for="oem-phone">電話番号</label><input type="tel" id="oem-phone" name="phone" autocomplete="tel"></div></div>
-        <div class="form-row"><label for="oem-type">ご相談内容 <span class="req" aria-label="必須項目">必須</span></label><select id="oem-type" name="type" required aria-required="true"><option value="">— ご選択ください —</option><option>OEM・商品開発のご相談</option><option>卸・継続取引のご相談</option><option>イベント・催事のご相談</option><option>その他</option></select></div>
-        <div class="form-row"><label for="oem-volume">ご希望数量・予算感（任意）</label><input type="text" id="oem-volume" name="volume" placeholder="例：月100個程度／単価500円台希望"></div>
-        <div class="form-row"><label for="oem-message">詳細・ご希望 <span class="req" aria-label="必須項目">必須</span></label><textarea id="oem-message" name="message" required aria-required="true" placeholder="商品イメージ、納品時期、その他ご要望をお聞かせください。"></textarea></div>
+        <div class="form-row split"><div><label>会社名・屋号 <span class="req">必須</span></label><input type="text" name="company" required></div><div><label>ご担当者名 <span class="req">必須</span></label><input type="text" name="name" required></div></div>
+        <div class="form-row split"><div><label>メールアドレス <span class="req">必須</span></label><input type="email" name="email" required></div><div><label>電話番号</label><input type="tel" name="phone"></div></div>
+        <div class="form-row"><label>ご相談内容 <span class="req">必須</span></label><select name="type" required><option value="">— ご選択ください —</option><option>OEM・商品開発のご相談</option><option>卸・継続取引のご相談</option><option>イベント・催事のご相談</option><option>その他</option></select></div>
+        <div class="form-row"><label>ご希望数量・予算感（任意）</label><input type="text" name="volume" placeholder="例：月100個程度／単価500円台希望"></div>
+        <div class="form-row"><label>詳細・ご希望 <span class="req">必須</span></label><textarea name="message" required placeholder="商品イメージ、納品時期、その他ご要望をお聞かせください。"></textarea></div>
         <button type="submit" class="form-submit">送信する</button>
         <p class="form-note">送信後、3営業日以内にご返信いたします。</p>
       </form>
       <form class="form-panel" data-panel="corporate" onsubmit="return submitForm(event,'corporate');">
-        <div class="form-row split"><div><label for="corp-company">会社名・団体名 <span class="req" aria-label="必須項目">必須</span></label><input type="text" id="corp-company" name="company" required aria-required="true"></div><div><label for="corp-name">ご担当者名 <span class="req" aria-label="必須項目">必須</span></label><input type="text" id="corp-name" name="name" required aria-required="true"></div></div>
-        <div class="form-row split"><div><label for="corp-email">メールアドレス <span class="req" aria-label="必須項目">必須</span></label><input type="email" id="corp-email" name="email" required aria-required="true" autocomplete="email"></div><div><label for="corp-phone">電話番号</label><input type="tel" id="corp-phone" name="phone" autocomplete="tel"></div></div>
-        <div class="form-row"><label for="corp-purpose">ギフト用途 <span class="req" aria-label="必須項目">必須</span></label><select id="corp-purpose" name="purpose" required aria-required="true"><option value="">— ご選択ください —</option><option>記念品・ノベルティ</option><option>お中元・お歳暮</option><option>周年・式典</option><option>結婚式・引き出物</option><option>その他</option></select></div>
-        <div class="form-row split"><div><label for="corp-quantity">ご希望数量</label><input type="text" id="corp-quantity" name="quantity" placeholder="例：50個"></div><div><label for="corp-due">ご希望納期</label><input type="text" id="corp-due" name="due" placeholder="例：3ヶ月後"></div></div>
-        <div class="form-row"><label for="corp-message">詳細・ご希望 <span class="req" aria-label="必須項目">必須</span></label><textarea id="corp-message" name="message" required aria-required="true" placeholder="ご予算、メッセージ、パッケージのご要望などをお聞かせください。"></textarea></div>
+        <div class="form-row split"><div><label>会社名・団体名 <span class="req">必須</span></label><input type="text" name="company" required></div><div><label>ご担当者名 <span class="req">必須</span></label><input type="text" name="name" required></div></div>
+        <div class="form-row split"><div><label>メールアドレス <span class="req">必須</span></label><input type="email" name="email" required></div><div><label>電話番号</label><input type="tel" name="phone"></div></div>
+        <div class="form-row"><label>ギフト用途 <span class="req">必須</span></label><select name="purpose" required><option value="">— ご選択ください —</option><option>記念品・ノベルティ</option><option>お中元・お歳暮</option><option>周年・式典</option><option>結婚式・引き出物</option><option>その他</option></select></div>
+        <div class="form-row split"><div><label>ご希望数量</label><input type="text" name="quantity" placeholder="例：50個"></div><div><label>ご希望納期</label><input type="text" name="due" placeholder="例：3ヶ月後"></div></div>
+        <div class="form-row"><label>詳細・ご希望 <span class="req">必須</span></label><textarea name="message" required placeholder="ご予算、メッセージ、パッケージのご要望などをお聞かせください。"></textarea></div>
         <button type="submit" class="form-submit">送信する</button>
         <p class="form-note">送信後、3営業日以内にご返信いたします。</p>
       </form>
       <form class="form-panel" data-panel="personal" onsubmit="return submitForm(event,'personal');">
-        <div class="form-row"><label for="personal-name">お名前 <span class="req" aria-label="必須項目">必須</span></label><input type="text" id="personal-name" name="name" required aria-required="true" autocomplete="name"></div>
-        <div class="form-row split"><div><label for="personal-email">メールアドレス <span class="req" aria-label="必須項目">必須</span></label><input type="email" id="personal-email" name="email" required aria-required="true" autocomplete="email"></div><div><label for="personal-phone">電話番号</label><input type="tel" id="personal-phone" name="phone" autocomplete="tel"></div></div>
-        <div class="form-row"><label for="personal-type">ご相談内容 <span class="req" aria-label="必須項目">必須</span></label><select id="personal-type" name="type" required aria-required="true"><option value="">— ご選択ください —</option><option>オーダーメイドケーキ</option><option>誕生日・記念日のご相談</option><option>ウェディングケーキ</option><option>商品について</option><option>その他</option></select></div>
-        <div class="form-row"><label for="personal-date">ご希望日（任意）</label><input type="date" id="personal-date" name="date"></div>
-        <div class="form-row"><label for="personal-message">詳細・ご希望 <span class="req" aria-label="必須項目">必須</span></label><textarea id="personal-message" name="message" required aria-required="true" placeholder="ご希望のサイズ、デザイン、お渡し場所などをお聞かせください。"></textarea></div>
+        <div class="form-row"><label>お名前 <span class="req">必須</span></label><input type="text" name="name" required></div>
+        <div class="form-row split"><div><label>メールアドレス <span class="req">必須</span></label><input type="email" name="email" required></div><div><label>電話番号</label><input type="tel" name="phone"></div></div>
+        <div class="form-row"><label>ご相談内容 <span class="req">必須</span></label><select name="type" required><option value="">— ご選択ください —</option><option>オーダーメイドケーキ</option><option>誕生日・記念日のご相談</option><option>ウェディングケーキ</option><option>商品について</option><option>その他</option></select></div>
+        <div class="form-row"><label>ご希望日（任意）</label><input type="date" name="date"></div>
+        <div class="form-row"><label>ご相談内容 <span class="req">必須</span></label><textarea name="message" required placeholder="ご希望のサイズ、デザイン、お渡し場所などをお聞かせください。"></textarea></div>
         <button type="submit" class="form-submit">送信する</button>
         <p class="form-note">ECサイト（<a href="https://oliodo0901.base.shop/" target="_blank" style="color:var(--chestnut);text-decoration:underline;">こちら</a>）でも商品をご購入いただけます。</p>
       </form>
@@ -2080,22 +1767,20 @@ textarea:focus-visible {
     </div>
   </div>
 </section>
-<div class="lightbox" id="careerModal" style="background:rgba(15,8,5,0.92);" role="dialog" aria-modal="true" aria-labelledby="careerModalTitle" aria-hidden="true" tabindex="-1">
+<div class="lightbox" id="careerModal" style="background:rgba(15,8,5,0.92);">
   <div style="background:var(--bg-pure);max-width:680px;width:100%;padding:48px clamp(24px,4vw,56px);max-height:90vh;overflow-y:auto;cursor:default;" onclick="event.stopPropagation();">
-    <div style="text-align:center;margin-bottom:32px;"><span class="eyebrow">Recruitment</span><h3 id="careerModalTitle" class="heading-jp" style="font-size:24px;margin-top:8px;">採用エントリー</h3></div>
+    <div style="text-align:center;margin-bottom:32px;"><span class="eyebrow">Recruitment</span><h3 class="heading-jp" style="font-size:24px;margin-top:8px;">採用エントリー</h3></div>
     <form onsubmit="return submitCareer(event);">
-      <div class="form-row"><label for="career-name">お名前 <span class="req" aria-label="必須項目">必須</span></label><input type="text" id="career-name" name="name" required aria-required="true" autocomplete="name"></div>
-      <div class="form-row split"><div><label for="career-email">メール <span class="req" aria-label="必須項目">必須</span></label><input type="email" id="career-email" name="email" required aria-required="true" autocomplete="email"></div><div><label for="career-phone">電話番号</label><input type="tel" id="career-phone" name="phone" autocomplete="tel"></div></div>
-      <div class="form-row"><label for="career-position">応募職種 <span class="req" aria-label="必須項目">必須</span></label><select id="career-position" name="position" required aria-required="true"><option value="">— ご選択ください —</option><option>パティシエ（経験者）</option><option>パティシエ（未経験・見習い）</option><option>製造アシスタント</option><option>販売・接客</option><option>その他</option></select></div>
-      <div class="form-row"><label for="career-motivation">志望動機・自己PR <span class="req" aria-label="必須項目">必須</span></label><textarea id="career-motivation" name="motivation" required aria-required="true" placeholder="Oliodo.へのご応募理由、これまでのご経験、菓子作りへの想いなどをお聞かせください。"></textarea></div>
+      <div class="form-row"><label>お名前 <span class="req">必須</span></label><input type="text" name="name" required></div>
+      <div class="form-row split"><div><label>メール <span class="req">必須</span></label><input type="email" name="email" required></div><div><label>電話番号</label><input type="tel" name="phone"></div></div>
+      <div class="form-row"><label>応募職種 <span class="req">必須</span></label><select name="position" required><option value="">— ご選択ください —</option><option>パティシエ（経験者）</option><option>パティシエ（未経験・見習い）</option><option>製造アシスタント</option><option>販売・接客</option><option>その他</option></select></div>
+      <div class="form-row"><label>志望動機・自己PR <span class="req">必須</span></label><textarea name="motivation" required placeholder="Oliodo.へのご応募理由、これまでのご経験、菓子作りへの想いなどをお聞かせください。"></textarea></div>
       <button type="submit" class="form-submit">エントリーする</button>
       <p class="form-note">受付後、担当者よりご連絡いたします。</p>
     </form>
-    <button type="button" class="lb-close" style="margin:24px auto 0;display:block;background:transparent;color:var(--chestnut);border-color:var(--chestnut);" onclick="document.getElementById('careerModal').classList.remove('active');document.getElementById('careerModal').setAttribute('aria-hidden','true');" aria-label="採用エントリーフォームを閉じる">閉じる</button>
+    <button class="lb-close" style="margin:24px auto 0;display:block;background:transparent;color:var(--chestnut);border-color:var(--chestnut);" onclick="document.getElementById('careerModal').classList.remove('active');">閉じる</button>
   </div>
 </div>
-
-</main>
 
 <footer class="footer">
   <div class="content">
@@ -2127,308 +1812,71 @@ textarea:focus-visible {
     </div>
   </div>
 </footer>
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle" aria-hidden="true" tabindex="-1">
-  <h2 id="lightboxTitle" class="visually-hidden">作品の拡大表示</h2>
-  <button type="button" class="lb-close" id="lightboxClose" aria-label="拡大表示を閉じる">Close ×</button>
-  <img id="lightboxImg" src="" alt="">
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="document.getElementById('lightbox').classList.remove('active');">Close ×</button>
+  <img src="" alt="">
 </div>
 
 <script>
-// =========================================================
-// Header scroll state
-// =========================================================
-const header = document.getElementById('header');
-window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 40));
-
-// =========================================================
-// Mobile menu
-// =========================================================
-const menuBtn = document.getElementById('menuBtn');
-const nav = document.getElementById('nav');
-menuBtn.addEventListener('click', () => {
-  const isOpen = menuBtn.classList.toggle('active');
-  nav.classList.toggle('active');
-  menuBtn.setAttribute('aria-expanded', String(isOpen));
-});
-nav.addEventListener('click', e => {
-  if (e.target.tagName === 'A') {
-    menuBtn.classList.remove('active');
-    nav.classList.remove('active');
-    menuBtn.setAttribute('aria-expanded', 'false');
-  }
-});
-
-// =========================================================
-// Hero Slideshow (reduced-motion respect)
-// =========================================================
-const slides = document.querySelectorAll('.hero-slide');
-const dots = document.querySelectorAll('.hero-dot');
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-let cur = 0;
-let si = null;
-
-function showSlide(i) {
-  slides.forEach((s, j) => s.classList.toggle('active', j === i));
-  dots.forEach((d, j) => {
-    d.classList.toggle('active', j === i);
-    d.setAttribute('aria-current', j === i ? 'true' : 'false');
-  });
-  cur = i;
-}
-
-if (!prefersReducedMotion) {
-  si = setInterval(() => showSlide((cur + 1) % slides.length), 5500);
-}
-
-dots.forEach((d, i) => {
-  d.setAttribute('role', 'button');
-  d.setAttribute('tabindex', '0');
-  d.setAttribute('aria-label', `スライド ${i + 1} を表示`);
-  const handler = () => {
-    if (si) clearInterval(si);
-    showSlide(i);
-    if (!prefersReducedMotion) {
-      si = setInterval(() => showSlide((cur + 1) % slides.length), 5500);
-    }
-  };
-  d.addEventListener('click', handler);
-  d.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      handler();
-    }
-  });
-});
-
-// =========================================================
-// Reveal on scroll (IntersectionObserver)
-// =========================================================
-const obs = new IntersectionObserver(entries => entries.forEach(e => {
-  if (e.isIntersecting) {
-    e.target.classList.add('is-visible');
-    obs.unobserve(e.target);
-  }
-}), { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-document.querySelectorAll('.reveal, .bubble').forEach(el => obs.observe(el));
-
-// =========================================================
-// Gallery filter (legacy - 残してあるが現在は未使用)
-// =========================================================
-document.querySelectorAll('.gallery-filter button').forEach(btn => btn.addEventListener('click', () => {
-  document.querySelectorAll('.gallery-filter button').forEach(b => b.classList.remove('active'));
+const header=document.getElementById('header');
+window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>40));
+const menuBtn=document.getElementById('menuBtn'),nav=document.getElementById('nav');
+menuBtn.addEventListener('click',()=>{menuBtn.classList.toggle('active');nav.classList.toggle('active');});
+nav.addEventListener('click',e=>{if(e.target.tagName==='A'){menuBtn.classList.remove('active');nav.classList.remove('active');}});
+const slides=document.querySelectorAll('.hero-slide'),dots=document.querySelectorAll('.hero-dot');
+let cur=0;
+function showSlide(i){slides.forEach((s,j)=>s.classList.toggle('active',j===i));dots.forEach((d,j)=>d.classList.toggle('active',j===i));cur=i;}
+let si=setInterval(()=>showSlide((cur+1)%slides.length),5500);
+dots.forEach((d,i)=>d.addEventListener('click',()=>{clearInterval(si);showSlide(i);si=setInterval(()=>showSlide((cur+1)%slides.length),5500);}));
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');obs.unobserve(e.target);}}),{threshold:0.12,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.reveal,.bubble').forEach(el=>obs.observe(el));
+document.querySelectorAll('.gallery-filter button').forEach(btn=>btn.addEventListener('click',()=>{
+  document.querySelectorAll('.gallery-filter button').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  const f = btn.dataset.filter;
-  document.querySelectorAll('.gallery-item').forEach(item => item.classList.toggle('hidden', f !== 'all' && item.dataset.cat !== f));
+  const f=btn.dataset.filter;
+  document.querySelectorAll('.gallery-item').forEach(item=>item.classList.toggle('hidden',f!=='all'&&item.dataset.cat!==f));
 }));
-
-// =========================================================
-// Lightbox（A11y強化版 / フォーカストラップ + ESC + フォーカス復元）
-// =========================================================
-const lb = document.getElementById('lightbox');
-const lbImg = document.getElementById('lightboxImg');
-const lbTitle = document.getElementById('lightboxTitle');
-const lbClose = document.getElementById('lightboxClose');
-let lbReturnFocus = null;
-
-const careerModal = document.getElementById('careerModal');
-let careerReturnFocus = null;
-
-function getFocusables(container) {
-  return container.querySelectorAll(
-    'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
-  );
-}
-
-function openLightbox(triggerEl, imgSrc, imgAlt) {
-  lbReturnFocus = triggerEl;
-  lbImg.src = imgSrc;
-  lbImg.alt = imgAlt || '';
-  lbTitle.textContent = imgAlt || '作品の拡大表示';
-  lb.classList.add('active');
-  lb.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-  setTimeout(() => lbClose.focus(), 50);
-}
-
-function closeLightbox() {
-  lb.classList.remove('active');
-  lb.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-  if (lbReturnFocus) {
-    lbReturnFocus.focus();
-    lbReturnFocus = null;
-  }
-}
-
-function openCareerModal(triggerEl) {
-  careerReturnFocus = triggerEl;
-  careerModal.classList.add('active');
-  careerModal.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-  setTimeout(() => {
-    const firstInput = careerModal.querySelector('input, select, textarea');
-    if (firstInput) firstInput.focus();
-  }, 50);
-}
-
-function closeCareerModal() {
-  careerModal.classList.remove('active');
-  careerModal.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-  if (careerReturnFocus) {
-    careerReturnFocus.focus();
-    careerReturnFocus = null;
-  }
-}
-
-// 画像クリックでLightbox起動（masonry, bubble両方）
-document.querySelectorAll('.bubble img, .masonry-item img').forEach(img => {
-  const trigger = img.closest('.bubble, .masonry-item');
-  if (trigger) {
-    trigger.setAttribute('tabindex', '0');
-    trigger.setAttribute('role', 'button');
-    trigger.setAttribute('aria-label', `${img.alt || '画像'}を拡大表示`);
-    trigger.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openLightbox(trigger, img.src, img.alt);
-      }
-    });
-  }
-  img.addEventListener('click', e => {
-    e.stopPropagation();
-    openLightbox(trigger || img, img.src, img.alt);
-  });
+const lb=document.getElementById('lightbox'),lbImg=lb.querySelector('img');
+document.querySelectorAll('.bubble img,.masonry-item img').forEach(img=>{
+  img.addEventListener('click',e=>{e.stopPropagation();lbImg.src=img.src;lb.classList.add('active');});
 });
-
-// Lightbox close handlers
-lbClose.addEventListener('click', e => {
-  e.stopPropagation();
-  closeLightbox();
-});
-lb.addEventListener('click', e => {
-  if (e.target === lb) closeLightbox();
-});
-
-// careerModal: 背景クリックで閉じる + 閉じるボタンの handler 上書き
-careerModal.addEventListener('click', e => {
-  if (e.target === careerModal) closeCareerModal();
-});
-
-// 採用情報リンクから careerModal 起動を A11y版に差し替え
-document.querySelectorAll('.recruit-cta').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    openCareerModal(link);
-  });
-});
-// careerModal の 閉じるボタンを再バインド（onclick属性のものも置き換え）
-careerModal.querySelectorAll('.lb-close').forEach(btn => {
-  btn.onclick = null;
-  btn.addEventListener('click', e => {
-    e.stopPropagation();
-    closeCareerModal();
-  });
-});
-
-// Global ESC + フォーカストラップ
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    if (lb.classList.contains('active')) {
-      closeLightbox();
-      return;
-    }
-    if (careerModal.classList.contains('active')) {
-      closeCareerModal();
-      return;
-    }
-  }
-  if (e.key !== 'Tab') return;
-
-  // どのモーダルが開いているか判定
-  const activeModal = lb.classList.contains('active') ? lb
-    : careerModal.classList.contains('active') ? careerModal
-    : null;
-  if (!activeModal) return;
-
-  const focusables = getFocusables(activeModal);
-  if (focusables.length === 0) return;
-
-  const first = focusables[0];
-  const last = focusables[focusables.length - 1];
-  if (e.shiftKey && document.activeElement === first) {
-    e.preventDefault();
-    last.focus();
-  } else if (!e.shiftKey && document.activeElement === last) {
-    e.preventDefault();
-    first.focus();
-  }
-});
-
-// =========================================================
-// Form tabs
-// =========================================================
-document.querySelectorAll('.form-tab').forEach(tab => {
-  tab.setAttribute('role', 'tab');
-  tab.setAttribute('tabindex', '0');
-  const handler = () => {
-    const t = tab.dataset.tab;
-    document.querySelectorAll('.form-tab').forEach(b => {
-      b.classList.remove('active');
-      b.setAttribute('aria-selected', 'false');
-    });
-    document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
-    document.getElementById('formSuccess').classList.remove('visible');
-    tab.classList.add('active');
-    tab.setAttribute('aria-selected', 'true');
-    document.querySelector(`.form-panel[data-panel="${t}"]`).classList.add('active');
-  };
-  tab.addEventListener('click', handler);
-  tab.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      handler();
-    }
-  });
-});
-
-// =========================================================
-// Form submit (mailto:)
-// =========================================================
-function submitForm(e, type) {
+lb.addEventListener('click',e=>{if(e.target===lb||e.target.classList.contains('lb-close'))lb.classList.remove('active');});
+document.getElementById('careerModal').addEventListener('click',e=>{if(e.target.id==='careerModal')e.currentTarget.classList.remove('active');});
+document.querySelectorAll('.form-tab').forEach(tab=>tab.addEventListener('click',()=>{
+  const t=tab.dataset.tab;
+  document.querySelectorAll('.form-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.form-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('formSuccess').classList.remove('visible');
+  tab.classList.add('active');
+  document.querySelector(`.form-panel[data-panel="${t}"]`).classList.add('active');
+}));
+function submitForm(e,type){
   e.preventDefault();
-  const data = new FormData(e.target);
-  const labels = { oem: 'OEM・卸', corporate: '法人ギフト', personal: '個人' };
-  let body = `[${labels[type]}のお問い合わせ]\n\n`;
-  for (const [k, v] of data.entries()) body += `${k}: ${v}\n`;
-  window.location.href = `mailto:w.sato@oliodo.com?subject=${encodeURIComponent('[Oliodo.] ' + labels[type])}&body=${encodeURIComponent(body)}`;
-  document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+  const data=new FormData(e.target);
+  const labels={oem:'OEM・卸',corporate:'法人ギフト',personal:'個人'};
+  let body=`[${labels[type]}のお問い合わせ]\n\n`;
+  for(const [k,v] of data.entries())body+=`${k}: ${v}\n`;
+  window.location.href=`mailto:w.sato@oliodo.com?subject=${encodeURIComponent('[Oliodo.] '+labels[type])}&body=${encodeURIComponent(body)}`;
+  document.querySelectorAll('.form-panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('formSuccess').classList.add('visible');
   return false;
 }
-
-function submitCareer(e) {
+function submitCareer(e){
   e.preventDefault();
-  const data = new FormData(e.target);
-  let body = '[採用エントリー]\n\n';
-  for (const [k, v] of data.entries()) body += `${k}: ${v}\n`;
-  window.location.href = `mailto:w.sato@oliodo.com?subject=${encodeURIComponent('[Oliodo. 採用エントリー]')}&body=${encodeURIComponent(body)}`;
-  closeCareerModal();
+  const data=new FormData(e.target);
+  let body='[採用エントリー]\n\n';
+  for(const [k,v] of data.entries())body+=`${k}: ${v}\n`;
+  window.location.href=`mailto:w.sato@oliodo.com?subject=${encodeURIComponent('[Oliodo. 採用エントリー]')}&body=${encodeURIComponent(body)}`;
+  alert('エントリーを送信します。');
+  document.getElementById('careerModal').classList.remove('active');
   return false;
 }
-
-// =========================================================
-// Smooth scroll
-// =========================================================
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const id = a.getAttribute('href');
-    if (id === '#' || id.length < 2) return;
-    const t = document.querySelector(id);
-    if (t) {
-      e.preventDefault();
-      window.scrollTo({ top: t.offsetTop - 60, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
-    }
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const id=a.getAttribute('href');
+    if(id==='#'||id.length<2)return;
+    const t=document.querySelector(id);
+    if(t){e.preventDefault();window.scrollTo({top:t.offsetTop-60,behavior:'smooth'});}
   });
 });
 </script>
