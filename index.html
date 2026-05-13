@@ -1745,35 +1745,63 @@ textarea:focus-visible {
 }
 
 .event-content {
-  max-width: 980px;
+  max-width: 1080px;
   margin: 0 auto;
   padding: 0 var(--content-pad);
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(40px, 6vw, 64px);
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(36px, 5vw, 56px);
+  align-items: stretch;
   position: relative;
-}
-@media (min-width: 880px) {
-  .event-content {
-    grid-template-columns: 5fr 6fr;
-    gap: clamp(48px, 7vw, 96px);
-  }
 }
 
 .event-visual {
   position: relative;
-  aspect-ratio: 4 / 5;
+  width: 100%;
+  aspect-ratio: 3 / 2;  /* 撮影元画像比率（1280×854）を完全に尊重 */
   background: var(--bg-section);
   overflow: hidden;
+  box-shadow: 0 12px 40px rgba(15, 8, 5, 0.12);
 }
 .event-visual img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 1.2s var(--ease-out);
+  object-position: center;
+  transition: transform 1.4s var(--ease-out);
 }
-.event-visual:hover img { transform: scale(1.03); }
+.event-visual:hover img { transform: scale(1.02); }
+
+/* 画像上の控えめなオーバーレイ - パフェの黒背景に文字が浮く */
+.event-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 8, 5, 0) 0%,
+    rgba(15, 8, 5, 0) 65%,
+    rgba(15, 8, 5, 0.35) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 画像右下のキャプション - "Photograph: 2026" 等の装飾 */
+.event-visual-caption {
+  position: absolute;
+  bottom: 16px;
+  right: 20px;
+  z-index: 2;
+  font-family: var(--sans-en);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  opacity: 0.85;
+}
+
 .event-visual-placeholder {
   position: absolute;
   inset: 0;
@@ -1799,7 +1827,27 @@ textarea:focus-visible {
   opacity: 0.6;
 }
 
+/* 画像下のテキスト情報 - 2カラム配置 */
 .event-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(32px, 4vw, 48px);
+  padding: 0 clamp(0px, 2vw, 24px);
+}
+@media (min-width: 720px) {
+  .event-info {
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(48px, 6vw, 72px);
+    align-items: start;
+  }
+}
+
+.event-info-left {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.event-info-right {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -2462,52 +2510,53 @@ textarea:focus-visible {
   <span class="section-num reveal">— Invitation</span>
   <div class="event-content">
     <div class="event-visual reveal">
-      <!-- TODO: コラボパフェ画像を images/event-enne-parfait.jpg として配置すると自動で表示される。プレースホルダーから差替: ↓のコメントを外して img に置き換え -->
-      <!-- <img src="images/event-enne-parfait.jpg" alt="enne × Oliodo. パフェコラボレーション" loading="lazy"> -->
-      <div class="event-visual-placeholder">
-        <span>Photograph<br>Coming Soon</span>
-      </div>
+      <img src="images/event-enne-parfait.jpg" alt="enne × Oliodo. パフェコラボレーション - ピスタチオとチェリーのパフェ、繊細なチョコレートオブジェを纏って" loading="lazy">
+      <span class="event-visual-caption">enne × Oliodo. / 2026</span>
     </div>
 
     <div class="event-info reveal">
-      <span class="event-eyebrow">Invitation · Limited Collaboration</span>
-      <h2 class="event-title">enne × Oliodo.<br>Parfait Collaboration</h2>
-      <p class="event-title-jp">パフェコラボレーション、<br>一日限りの特別な席。</p>
 
-      <div class="event-divider"></div>
-
-      <p class="event-thanks">
-        2026年5月23日、enne daikanyama にて開催したパフェコラボレーションは、<br>
-        おかげさまをもちまして無事終了いたしました。<br>
-        ご来場いただいた皆さま、誠にありがとうございました。
-      </p>
-
-      <div class="event-meta">
-        <div class="event-meta-row">
-          <span class="event-meta-label">Date</span>
-          <span class="event-meta-value"><span class="em">5.23</span> SAT, 2026</span>
-        </div>
-        <div class="event-meta-row">
-          <span class="event-meta-label">Venue</span>
-          <span class="event-meta-value">
-            enne daikanyama<br>
-            <span style="font-size:0.85em;color:var(--text-mute);letter-spacing:0.08em;">東京都渋谷区猿楽町12-35 1F</span>
-          </span>
-        </div>
+      <div class="event-info-left">
+        <span class="event-eyebrow">Invitation · Limited Collaboration</span>
+        <h2 class="event-title">enne × Oliodo.<br>Parfait Collaboration</h2>
+        <p class="event-title-jp">パフェコラボレーション、<br>一日限りの特別な席。</p>
+        <div class="event-divider"></div>
+        <p class="event-thanks">
+          2026年5月23日、enne daikanyama にて開催したパフェコラボレーションは、<br>
+          おかげさまをもちまして無事終了いたしました。<br>
+          ご来場いただいた皆さま、誠にありがとうございました。
+        </p>
       </div>
 
-      <div class="event-warning">
-        ※ <strong>Safari / Chrome でご予約ページを開いてください。</strong>Instagram内ブラウザでは予約フォームが正しく動作しません。
+      <div class="event-info-right">
+        <div class="event-meta">
+          <div class="event-meta-row">
+            <span class="event-meta-label">Date</span>
+            <span class="event-meta-value"><span class="em">5.23</span> SAT, 2026</span>
+          </div>
+          <div class="event-meta-row">
+            <span class="event-meta-label">Venue</span>
+            <span class="event-meta-value">
+              enne daikanyama<br>
+              <span style="font-size:0.85em;color:var(--text-mute);letter-spacing:0.08em;">東京都渋谷区猿楽町12-35 1F</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="event-warning">
+          ※ <strong>Safari / Chrome でご予約ページを開いてください。</strong>Instagram内ブラウザでは予約フォームが正しく動作しません。
+        </div>
+
+        <a class="event-cta"
+           href="https://wataru0917.github.io/enne-reserve/?utm_source=oliodo&amp;utm_medium=event_section&amp;utm_campaign=enne_collab_2026_05"
+           target="_blank"
+           rel="noopener"
+           aria-label="enne × Oliodo. パフェコラボ ご予約ページへ進む">
+          ご予約に進む
+        </a>
+        <p class="event-cta-note">Reservation via enne</p>
       </div>
 
-      <a class="event-cta"
-         href="https://wataru0917.github.io/enne-reserve/?utm_source=oliodo&amp;utm_medium=event_section&amp;utm_campaign=enne_collab_2026_05"
-         target="_blank"
-         rel="noopener"
-         aria-label="enne × Oliodo. パフェコラボ ご予約ページへ進む">
-        ご予約に進む
-      </a>
-      <p class="event-cta-note">Reservation via enne</p>
     </div>
   </div>
 </section>
