@@ -1720,16 +1720,111 @@ textarea:focus-visible {
 }
 
 @media (max-width: 768px) {
+  /* スマホでは Hero の上にバナーを置かない（Hero の主役を絶対に守る）
+     代わりに Marquee 直後の「告知帯」で誘導する */
   .event-banner {
-    top: 76px;
-    right: 16px;
-    left: 16px;
-    max-width: none;
-    padding: 12px 16px;
+    display: none !important;
   }
-  .event-banner-title { font-size: 13px; }
-  .event-banner-meta { font-size: 9px; letter-spacing: 0.18em; }
-  .event-banner-date { font-size: 11px; }
+}
+
+/* =========================================================
+   Event Notice Bar（スマホ専用）
+   Hero / Marquee の直後に表示される控えめな告知帯
+   PC では非表示（Hero のオーバーレイバナーで誘導）
+========================================================= */
+.event-notice-bar {
+  display: none;
+  background: var(--bg-cream);
+  border-top: 1px solid var(--gold-soft);
+  border-bottom: 1px solid var(--gold-soft);
+}
+/* スマホ + イベント期間中のみ表示 */
+.event-active .event-notice-bar { display: block; }
+
+.event-notice-bar-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px var(--content-pad);
+  max-width: 720px;
+  margin: 0 auto;
+  text-decoration: none;
+  color: var(--text-primary);
+  position: relative;
+}
+.event-notice-bar-link::before {
+  content: '';
+  position: absolute;
+  left: var(--content-pad);
+  top: 50%;
+  width: 3px;
+  height: 24px;
+  background: var(--chestnut);
+  transform: translateY(-50%);
+}
+.event-notice-bar-content {
+  flex: 1;
+  padding-left: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.event-notice-bar-label {
+  font-family: var(--sans-en);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--chestnut);
+}
+.event-notice-bar-title {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+}
+.event-notice-bar-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 2px;
+  font-family: var(--sans-en);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--text-mute);
+}
+.event-notice-bar-date {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--chestnut);
+}
+.event-notice-bar-arrow {
+  font-family: var(--serif-en);
+  font-size: 18px;
+  color: var(--chestnut);
+  margin-left: 8px;
+  transition: transform 0.4s var(--ease);
+}
+.event-notice-bar-link:hover .event-notice-bar-arrow,
+.event-notice-bar-link:active .event-notice-bar-arrow {
+  transform: translateX(4px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .event-notice-bar-arrow { transition: none; }
+}
+
+/* 5/24 0:00 以降は告知帯も自動非表示 */
+.event-finished .event-notice-bar { display: none !important; }
+
+/* PC では告知帯は使わない（Heroバナーが主役）*/
+@media (min-width: 769px) {
+  .event-notice-bar { display: none !important; }
 }
 
 /* Event Detail セクション（Parfait と Gallery の間） */
@@ -2353,6 +2448,23 @@ textarea:focus-visible {
     <span>Olivier odorant</span><span>Period.</span><span>Seasonal Craft</span><span>金木犀の香り</span><span>人生の節目に</span><span>Olivier odorant</span><span>Period.</span><span>Seasonal Craft</span><span>金木犀の香り</span><span>人生の節目に</span>
   </div>
 </div>
+
+<!-- Event Notice Bar: スマホ専用の控えめ告知帯（イベント期間中のみ表示） -->
+<aside class="event-notice-bar" aria-label="enne × Oliodo. パフェコラボ 告知">
+  <a class="event-notice-bar-link"
+     href="#event"
+     aria-label="enne × Oliodo. パフェコラボ 詳細セクションへ">
+    <div class="event-notice-bar-content">
+      <span class="event-notice-bar-label">Invitation · Limited</span>
+      <span class="event-notice-bar-title">enne × Oliodo. Parfait Collaboration</span>
+      <span class="event-notice-bar-meta">
+        <span class="event-notice-bar-date">5.23 SAT</span>
+        <span>· 詳細を見る</span>
+      </span>
+    </div>
+    <span class="event-notice-bar-arrow" aria-hidden="true">→</span>
+  </a>
+</aside>
 
 <section class="section statement">
   <div class="content">
