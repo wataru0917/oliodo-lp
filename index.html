@@ -508,6 +508,144 @@ textarea:focus-visible {
   }
   .cred-year { font-size: 12px; }
 }
+
+/* =========================================================
+   Hero Event Banner（イベント誘導 / 期間限定 / 取外し可）
+   挙動：
+   - 5/23 23:59 までは Hero 右上に控えめに表示
+   - 5/24 0:00 〜 5/30 23:59 は「Thank you」表示に切替
+   - 5/31 0:00 以降は完全非表示（JSでremoveされる）
+   - ユーザーが × で閉じたら sessionStorage で同セッション中は再表示しない
+========================================================= */
+.event-banner {
+  position: absolute;
+  top: clamp(80px, 12vh, 120px);
+  right: var(--content-pad);
+  z-index: 5;
+  display: flex;
+  align-items: stretch;
+  background: rgba(15, 8, 5, 0.55);
+  backdrop-filter: blur(10px) saturate(120%);
+  -webkit-backdrop-filter: blur(10px) saturate(120%);
+  border: 1px solid rgba(232, 200, 122, 0.4);
+  max-width: 340px;
+  opacity: 0;
+  transform: translateY(-12px);
+  animation: bannerFadeIn 0.9s var(--ease-out) 2.0s forwards;
+  transition: opacity 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+.event-banner:hover {
+  border-color: rgba(232, 200, 122, 0.7);
+  background: rgba(15, 8, 5, 0.7);
+}
+.event-banner.is-thank-you { /* 5/24〜5/30 の感謝モード */
+  background: rgba(15, 8, 5, 0.45);
+  border-color: rgba(232, 200, 122, 0.25);
+}
+
+.event-banner-link {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 14px 18px;
+  flex: 1;
+  min-width: 0;
+  text-decoration: none;
+  color: var(--text-light);
+}
+.event-banner-eyebrow {
+  font-family: var(--sans-en);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 6px;
+}
+.event-banner-title {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  line-height: 1.25;
+  color: var(--text-light);
+  margin-bottom: 4px;
+}
+.event-banner-date {
+  font-family: var(--sans-jp);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  color: var(--gold-light);
+  opacity: 0.85;
+}
+.event-banner-cta {
+  font-family: var(--sans-jp);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--gold-light);
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(232, 200, 122, 0.25);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.event-banner-cta::after {
+  content: '→';
+  font-family: var(--serif-en);
+  font-style: italic;
+  margin-left: auto;
+  transition: transform 0.4s var(--ease);
+}
+.event-banner-link:hover .event-banner-cta::after {
+  transform: translateX(4px);
+}
+
+.event-banner-close {
+  flex: 0 0 auto;
+  width: 28px;
+  background: transparent;
+  border: none;
+  border-left: 1px solid rgba(232, 200, 122, 0.2);
+  color: var(--text-light);
+  cursor: pointer;
+  font-size: 14px;
+  font-family: var(--sans-en);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+  transition: opacity 0.3s var(--ease);
+}
+.event-banner-close:hover {
+  opacity: 1;
+}
+
+@keyframes bannerFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* モバイル: より控えめに、画面下部に固定（重要なHeroテキストを邪魔しない） */
+@media (max-width: 768px) {
+  .event-banner {
+    position: fixed;
+    top: auto;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    max-width: none;
+    animation-delay: 2.5s;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+  .event-banner-title { font-size: 13px; }
+  .event-banner-eyebrow { font-size: 8px; }
+}
 .hero-scroll {
   position: absolute;
   bottom: 36px;
@@ -1502,6 +1640,355 @@ textarea:focus-visible {
 }
 
 /* =========================================================
+   Event Banner & Event Detail Section（追加 / Pop-up Collab）
+   2026-05-23 enne × Oliodo. Parfait Collaboration
+   自動非表示は JS（.event-active / .event-finished クラスで制御）
+========================================================= */
+
+/* Hero右上 オーバーレイバナー */
+.event-banner {
+  position: absolute;
+  top: 92px;
+  right: clamp(20px, 4vw, 56px);
+  z-index: 5;
+  display: none; /* デフォルト非表示。JSで .event-active なら表示 */
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 22px;
+  max-width: 320px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--gold-soft);
+  border-left: 2px solid var(--chestnut);
+  text-decoration: none;
+  color: var(--text-primary);
+  opacity: 0;
+  transform: translateY(-8px);
+  animation: heroFadeIn 1.4s var(--ease-out) 2.0s forwards;
+  transition: border-color 0.4s var(--ease), background 0.4s var(--ease), transform 0.4s var(--ease);
+}
+.event-active .event-banner { display: flex; }
+.event-banner:hover {
+  background: rgba(255, 255, 255, 0.98);
+  border-left-color: var(--gold-primary);
+  transform: translateY(-10px);
+}
+.event-banner-label {
+  font-family: var(--sans-en);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--chestnut);
+}
+.event-banner-title {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+  color: var(--text-primary);
+}
+.event-banner-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+  font-family: var(--sans-en);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  color: var(--text-mute);
+}
+.event-banner-date {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--chestnut);
+}
+.event-banner-arrow {
+  margin-left: auto;
+  font-family: var(--serif-en);
+  color: var(--chestnut);
+  transition: transform 0.4s var(--ease);
+}
+.event-banner:hover .event-banner-arrow {
+  transform: translateX(4px);
+}
+
+@media (max-width: 768px) {
+  .event-banner {
+    top: 76px;
+    right: 16px;
+    left: 16px;
+    max-width: none;
+    padding: 12px 16px;
+  }
+  .event-banner-title { font-size: 13px; }
+  .event-banner-meta { font-size: 9px; letter-spacing: 0.18em; }
+  .event-banner-date { font-size: 11px; }
+}
+
+/* Event Detail セクション（Parfait と Gallery の間） */
+.section.event {
+  display: none; /* デフォルト非表示。JS制御 */
+  background: var(--bg-warm);
+  position: relative;
+  overflow: hidden;
+}
+.event-active .section.event,
+.event-finished .section.event {
+  display: block;
+}
+
+.event-content {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 var(--content-pad);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(40px, 6vw, 64px);
+  align-items: center;
+  position: relative;
+}
+@media (min-width: 880px) {
+  .event-content {
+    grid-template-columns: 5fr 6fr;
+    gap: clamp(48px, 7vw, 96px);
+  }
+}
+
+.event-visual {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background: var(--bg-section);
+  overflow: hidden;
+}
+.event-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s var(--ease-out);
+}
+.event-visual:hover img { transform: scale(1.03); }
+.event-visual-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-family: var(--sans-en);
+  font-size: 10px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  background:
+    linear-gradient(135deg, var(--bg-section) 0%, var(--bg-warm) 100%);
+  border: 1px solid var(--line);
+}
+.event-visual-placeholder::before {
+  content: '';
+  width: 48px; height: 48px;
+  border: 1px solid var(--gold-muted);
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.event-info {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.event-eyebrow {
+  font-family: var(--sans-en);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--chestnut);
+}
+.event-title {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(28px, 4.5vw, 44px);
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  color: var(--text-primary);
+}
+.event-title-jp {
+  font-family: var(--serif-jp);
+  font-weight: 300;
+  font-size: clamp(14px, 1.6vw, 16px);
+  letter-spacing: 0.28em;
+  line-height: 1.9;
+  color: var(--text-body);
+  margin-top: -8px;
+}
+.event-divider {
+  width: 56px;
+  height: 1px;
+  background: var(--gold-primary);
+  margin: 4px 0;
+}
+.event-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.event-meta-row {
+  display: flex;
+  gap: 20px;
+  align-items: baseline;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+.event-meta-row:last-child { border-bottom: none; padding-bottom: 0; }
+.event-meta-label {
+  font-family: var(--sans-en);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  min-width: 60px;
+}
+.event-meta-value {
+  font-family: var(--serif-jp);
+  font-size: clamp(14px, 1.5vw, 16px);
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  line-height: 1.7;
+  color: var(--text-primary);
+  flex: 1;
+}
+.event-meta-value .em {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 1.2em;
+  color: var(--chestnut);
+  letter-spacing: 0.04em;
+}
+
+/* Instagram警告 */
+.event-warning {
+  padding: 14px 18px;
+  background: rgba(123, 79, 31, 0.06);
+  border-left: 2px solid var(--gold-muted);
+  font-family: var(--serif-jp);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  line-height: 1.8;
+  color: var(--text-body);
+}
+.event-warning strong {
+  font-weight: 600;
+  color: var(--chestnut);
+}
+
+/* Event CTA */
+.event-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 12px;
+  padding: 20px 32px;
+  background: var(--chestnut);
+  color: var(--bg-pure);
+  font-family: var(--sans-en);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--chestnut);
+  transition: background 0.4s var(--ease), border-color 0.4s var(--ease), color 0.4s var(--ease), transform 0.3s var(--ease);
+}
+.event-cta:hover {
+  background: var(--chestnut-deep);
+  border-color: var(--chestnut-deep);
+  transform: translateY(-2px);
+}
+.event-cta::after {
+  content: '→';
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 14px;
+  letter-spacing: 0;
+  transition: transform 0.4s var(--ease);
+}
+.event-cta:hover::after {
+  transform: translateX(4px);
+}
+.event-cta-note {
+  font-family: var(--sans-en);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  margin-top: 8px;
+}
+
+/* イベント終了後（5/24以降）のモード */
+.event-finished .section.event {
+  background: var(--bg-cream);
+}
+.event-finished .event-banner { display: none !important; }
+.event-finished .event-cta,
+.event-finished .event-cta-note,
+.event-finished .event-warning { display: none; }
+.event-finished .event-thanks {
+  display: block;
+  font-family: var(--serif-jp);
+  font-size: clamp(15px, 1.7vw, 17px);
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  line-height: 2.0;
+  color: var(--text-body);
+  padding: 18px 0;
+  border-top: 1px solid var(--gold-soft);
+  border-bottom: 1px solid var(--gold-soft);
+}
+.event-thanks { display: none; }
+.event-finished .event-title::after,
+.event-finished .event-eyebrow::after {
+  /* "Archive" 表記を追加 */
+}
+.event-finished .event-eyebrow {
+  color: var(--text-mute);
+}
+
+/* ナビメニューの Event リンク */
+.nav .nav-event {
+  display: none;
+  color: var(--chestnut);
+  position: relative;
+}
+.event-active .nav .nav-event { display: inline-block; }
+.nav .nav-event::before {
+  content: '·';
+  position: absolute;
+  left: -10px;
+  color: var(--gold-primary);
+  animation: eventPulse 2s ease-in-out infinite;
+}
+@keyframes eventPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav .nav-event::before { animation: none; opacity: 0.7; }
+}
+
+/* =========================================================
    Lightbox
 ========================================================= */
 .lightbox {
@@ -1761,6 +2248,7 @@ textarea:focus-visible {
     <a href="#philosophy">哲学</a>
     <a href="#patissier">パティシエ</a>
     <a href="#award">受賞</a>
+    <a href="#event" class="nav-event">Event</a>
     <a href="#gallery">ギャラリー</a>
     <a href="#oem" class="nav-cta">OEM相談</a>
   </nav>
@@ -1783,6 +2271,22 @@ textarea:focus-visible {
     <span class="hero-dot" data-slide="3"></span>
     <span class="hero-dot" data-slide="4"></span>
   </div>
+
+  <!-- Event Banner: enne × Oliodo. Parfait Collaboration（2026-05-23 限定） -->
+  <a class="event-banner"
+     href="https://wataru0917.github.io/enne-reserve/?utm_source=oliodo&amp;utm_medium=hero_banner&amp;utm_campaign=enne_collab_2026_05"
+     target="_blank"
+     rel="noopener"
+     aria-label="enne × Oliodo. パフェコラボ 5月23日土曜日 ご予約ページへ">
+    <span class="event-banner-label">Invitation · Limited</span>
+    <span class="event-banner-title">enne × Oliodo.<br>Parfait Collaboration</span>
+    <span class="event-banner-meta">
+      <span class="event-banner-date">5.23 SAT</span>
+      <span>ご予約はこちら</span>
+      <span class="event-banner-arrow" aria-hidden="true">→</span>
+    </span>
+  </a>
+
   <div class="hero-inner">
     <img src="images/logo-cream.png" alt="Oliodo." class="hero-logo">
     <p class="hero-jp">金木犀の香りのように、<br>静かに心に残る菓子を。</p>
@@ -1949,6 +2453,61 @@ textarea:focus-visible {
       <div class="masonry-item reveal"><img src="images/pf-peach-cu.jpg" alt="桃パフェ" loading="lazy"></div>
       <div class="masonry-item reveal"><img src="images/pf-matcha3.jpg" alt="抹茶パフェ" loading="lazy"></div>
       <div class="masonry-item reveal"><img src="images/pf-cherry6.jpg" alt="さくらんぼパフェ" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== EVENT DETAIL（Pop-up Collaboration） ============== -->
+<section class="section event" id="event" aria-label="enne × Oliodo. パフェコラボレーション">
+  <span class="section-num reveal">— Invitation</span>
+  <div class="event-content">
+    <div class="event-visual reveal">
+      <!-- TODO: コラボパフェ画像を images/event-enne-parfait.jpg として配置すると自動で表示される。プレースホルダーから差替: ↓のコメントを外して img に置き換え -->
+      <!-- <img src="images/event-enne-parfait.jpg" alt="enne × Oliodo. パフェコラボレーション" loading="lazy"> -->
+      <div class="event-visual-placeholder">
+        <span>Photograph<br>Coming Soon</span>
+      </div>
+    </div>
+
+    <div class="event-info reveal">
+      <span class="event-eyebrow">Invitation · Limited Collaboration</span>
+      <h2 class="event-title">enne × Oliodo.<br>Parfait Collaboration</h2>
+      <p class="event-title-jp">パフェコラボレーション、<br>一日限りの特別な席。</p>
+
+      <div class="event-divider"></div>
+
+      <p class="event-thanks">
+        2026年5月23日、enne daikanyama にて開催したパフェコラボレーションは、<br>
+        おかげさまをもちまして無事終了いたしました。<br>
+        ご来場いただいた皆さま、誠にありがとうございました。
+      </p>
+
+      <div class="event-meta">
+        <div class="event-meta-row">
+          <span class="event-meta-label">Date</span>
+          <span class="event-meta-value"><span class="em">5.23</span> SAT, 2026</span>
+        </div>
+        <div class="event-meta-row">
+          <span class="event-meta-label">Venue</span>
+          <span class="event-meta-value">
+            enne daikanyama<br>
+            <span style="font-size:0.85em;color:var(--text-mute);letter-spacing:0.08em;">東京都渋谷区猿楽町12-35 1F</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="event-warning">
+        ※ <strong>Safari / Chrome でご予約ページを開いてください。</strong>Instagram内ブラウザでは予約フォームが正しく動作しません。
+      </div>
+
+      <a class="event-cta"
+         href="https://wataru0917.github.io/enne-reserve/?utm_source=oliodo&amp;utm_medium=event_section&amp;utm_campaign=enne_collab_2026_05"
+         target="_blank"
+         rel="noopener"
+         aria-label="enne × Oliodo. パフェコラボ ご予約ページへ進む">
+        ご予約に進む
+      </a>
+      <p class="event-cta-note">Reservation via enne</p>
     </div>
   </div>
 </section>
@@ -2431,6 +2990,36 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     }
   });
 });
+
+// =========================================================
+// Event Banner / Event Section 自動切替
+// 2026-05-23 enne × Oliodo. Parfait Collaboration
+// - 5/23 23:59 まで: .event-active（バナー表示 + Detail通常表示 + CTA有効）
+// - 5/24 0:00 ～ 5/30 23:59: .event-finished（バナー消える + Detail感謝モード）
+// - 5/31 0:00 以降: クラスなし（Detailセクションも消える）
+// 後で別イベントを入れる場合は EVENT_CONFIG を書き換えるだけで再利用可能
+// =========================================================
+(function() {
+  const EVENT_CONFIG = {
+    // JSTで指定（end_at と archive_until は inclusive）
+    starts_at:      '2026-05-13T00:00:00+09:00', // バナー出し始め（今日）
+    ends_at:        '2026-05-23T23:59:59+09:00', // イベント終了時刻
+    archive_until:  '2026-05-30T23:59:59+09:00'  // 感謝モード継続期限
+  };
+
+  const now = new Date();
+  const starts = new Date(EVENT_CONFIG.starts_at);
+  const ends = new Date(EVENT_CONFIG.ends_at);
+  const archiveUntil = new Date(EVENT_CONFIG.archive_until);
+
+  const body = document.body;
+  if (now >= starts && now <= ends) {
+    body.classList.add('event-active');
+  } else if (now > ends && now <= archiveUntil) {
+    body.classList.add('event-finished');
+  }
+  // それ以外（starts 以前 / archive_until 以降）はクラス付与なし → 全非表示
+})();
 </script>
 </body>
 </html>
